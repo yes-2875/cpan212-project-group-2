@@ -8,10 +8,14 @@ An MVP list of 4 to 8 features you'll have working by M6, and a Later list of id
 Its name and a link to its docs, whether it needs a key, its rate limits or terms that affect you, and which feature uses it. Include one real request you ran (the full URL) and the response you got, trimmed to the fields you'll use, in a code block.
 
 Our application will use the jikan-edge API to retrieve anime information. The API provides information about anime such as titles, scores, episode counts, airing status, genres, and images.
-**Documentation**: https://jikan.lucashdo.com/docs
-**Authentication**: The API does not require an API key.
 
-The API will be used when a user searches for an anime. Our Express server will send a request to the external API and return the search results to the React frontend. When the user selects an anime, our application can save the required anime information in our own MongoDB database.
+**Documentation**: https://jikan.lucashdo.com/docs
+
+**Authentication**: No API key is required.
+
+**Rate limits**: 30 requests per 10 seconds, and 60 requests per minute enforced across all routes.
+
+The API will be used when a user searches for an anime. Our Express server will send a request to the external API and return anime search results to the React frontend. When the user selects an anime, our application can save the required anime information in our own MongoDB database.
 
 ### Example request: https://jikan.lucashdo.com/v1/anime/1
 ### Example response: 
