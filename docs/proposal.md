@@ -1,5 +1,5 @@
 ## 1. Problem and users
-One or two paragraphs: who the app is for and what problem it solves for them.
+Our app is for anime fans who are looking for a way to track the animes they have completed, dropped, put on hold, or are currently watching. Through the data provided by Jinkan, our app will facilitate creating and editing anime collections. This solves the problems of forgetting which episode you were on, figuring out which anime you should watch next, and more.
 
 ## 2. Features
 An MVP list of 4 to 8 features you'll have working by M6, and a Later list of ideas you won't build this term. Each MVP feature is one sentence that starts with the user, for example "A signed-in user can add a recipe to a weekly meal plan."
