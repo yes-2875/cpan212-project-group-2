@@ -2,7 +2,16 @@
 Our app is for anime fans who are looking for a way to track the animes they have completed, dropped, put on hold, or are currently watching. Through the data provided by Jinkan, our app will facilitate creating and editing anime collections. This solves the problems of forgetting which episode you were on, figuring out which anime you should watch next, and more.
 
 ## 2. Features
-An MVP list of 4 to 8 features you'll have working by M6, and a Later list of ideas you won't build this term. Each MVP feature is one sentence that starts with the user, for example "A signed-in user can add a recipe to a weekly meal plan."
+- A user can search through the anime database.
+- A user can add an anime to a list.
+- A signed-in user can rate an anime.
+- A signed-in user can write a review on an anime.
+
+### 2.1 Later list
+- A signed-in user can discuss animes on forums.
+- A signed-in user can edit anime detail pages.
+- A signed-in user can join an online anime club.
+- A signed-in user can search through a user list.
 
 ## 3. External API
 Its name and a link to its docs, whether it needs a key, its rate limits or terms that affect you, and which feature uses it. Include one real request you ran (the full URL) and the response you got, trimmed to the fields you'll use, in a code block.
