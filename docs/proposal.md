@@ -115,6 +115,9 @@ A sketch of at least 4 pages: a list page, a detail page, a create form and an e
 
 ## 7. Team roles
 Who leads the API, the frontend, the database, and the repo and pull requests. Leading an area doesn't mean doing all of it: everyone writes code in every milestone from M2 on.
+API lead: Zlata
+Frontend, repo, and pull requests lead: Mirza
+Database lead: Keziah
 
 ## 8. Repo setup
 The public repo cpan212-project-group-<N> with the layout from section 3: api/ and web/ folders (a one-line README.md in each is enough for now), a root README.md with the app name, group number, and each member's name and GitHub username, and a .gitignore that covers node_modules/ and .env.
