@@ -1,11 +1,21 @@
 ## 1. Problem and users
-One or two paragraphs: who the app is for and what problem it solves for them.
+This app is for anime fans who are looking for a way to track the multiple anime TV shows they have completed, dropped, put on hold, or are currently watching across various streaming platforms. Through the data provided by the Jikan-edge REST API, our app will facilitate the creation and editing of anime watchlists, solving the problem of forgetting which episode one was on, figuring out and organizing which anime one should watch next, and search animes all in a centralized hub.
 
-## 2. Features
-An MVP list of 4 to 8 features you'll have working by M6, and a Later list of ideas you won't build this term. Each MVP feature is one sentence that starts with the user, for example "A signed-in user can add a recipe to a weekly meal plan."
+## 2. MVP Features
+- A user can search through the anime database.
+- A user can register for an account and sign in to create custom watch lists.
+- A signed-in user can update watched episode count and completion status for each anime in their watchlist.
+- A signed-in user can delete watchlist entries and watchlists.
+- A signed-in user can view all their custom watchlists on the homepage.
+
+### 2.1 Later list
+- A signed-in user can discuss animes on forums.
+- A signed-in user can edit anime detail pages.
+- A signed-in user can join an online anime club.
+- A signed-in user can search through a user list.
+- A signed-in user can rate and review an anime.
 
 ## 3. External API
-Its name and a link to its docs, whether it needs a key, its rate limits or terms that affect you, and which feature uses it. Include one real request you ran (the full URL) and the response you got, trimmed to the fields you'll use, in a code block.
 
 Our application will use the jikan-edge API to retrieve anime information. The API provides information about anime such as titles, scores, episode counts, airing status, genres, and images.
 
@@ -43,8 +53,6 @@ The API will be used when a user searches for an anime. Our Express server will 
 **The response above is trimmed to show only the information that is relevant to our application.**
 
 ## 4. Data model draft
-Your two main resources and a User. For each: every field, its type, and whether it's required. Then how they relate, for example "a meal plan has many recipes; a user owns many meal plans."
-
 Our application will use MongoDB to store users' personal wwanime lists and reviews. Anime information from the external API will be used to populate an anime list item, but the user's saved data will be stored in our own database.
 
 ### User
@@ -76,14 +84,13 @@ Our application will use MongoDB to store users' personal wwanime lists and revi
 - `updatedAt`: Date, required
 
 ### Relationships
-A User can have many AnimeListItem records.
-Each AnimeListItem belongs to one User.
-A User can create many Reviews.
-Each Review belongs to one User.
-Each Review belongs to one AnimeListItem.
+- A User can have many AnimeListItem records.
+- Each AnimeListItem belongs to one User.
+- A User can create many Reviews.
+- Each Review belongs to one User.
+- Each Review belongs to one AnimeListItem.
 
 ## 5. Endpoint list
-A table with method, path, what it does, the success status code, and the error status codes it can return. It covers list, get one, create, update and delete for both main resources, plus the endpoint that uses the external API. Every path starts with `/api/`.
 
 | Method | Path                  | Description                   | Success | Errors        |
 | ------ | --------------------- | ----------------------------- | ------- | ------------- |
@@ -100,10 +107,14 @@ A table with method, path, what it does, the success status code, and the error 
 | GET    | `/api/external/anime` | Search the external anime API | 200     | 400, 502      |
 
 ## 6. Wireframes
-A sketch of at least 4 pages: a list page, a detail page, a create form and an edit form (these become your M3 pages). Photos of paper sketches are fine. The images are in docs/wireframes/ and shown in proposal.md.
+Unfinished
 
 ## 7. Team roles
-Who leads the API, the frontend, the database, and the repo and pull requests. Leading an area doesn't mean doing all of it: everyone writes code in every milestone from M2 on.
+**API lead:** Zlata
+
+**Frontend, repository, and pull requests lead:** Mirza
+
+**Database lead (MongoDB):** Keziah
 
 ## 8. Repo setup
 The public repo cpan212-project-group-<N> with the layout from section 3: api/ and web/ folders (a one-line README.md in each is enough for now), a root README.md with the app name, group number, and each member's name and GitHub username, and a .gitignore that covers node_modules/ and .env.
