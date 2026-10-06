@@ -3,15 +3,17 @@ Our app is for anime fans who are looking for a way to track the animes they hav
 
 ## 2. Features
 - A user can search through the anime database.
-- A user can add an anime to a list.
-- A signed-in user can rate an anime.
-- A signed-in user can write a review on an anime.
+- A user can register for an account and sign in to create custom watch lists.
+- A signed-in user can update watched episode count and completion status for each anime in their watchlist.
+- A signed-in user can delete watchlist entries and watchlists.
+- A signed-in user can view all their custom watchlists on the homepage.
 
 ### 2.1 Later list
 - A signed-in user can discuss animes on forums.
 - A signed-in user can edit anime detail pages.
 - A signed-in user can join an online anime club.
 - A signed-in user can search through a user list.
+- A signed-in user can rate and review an anime.
 
 ## 3. External API
 Its name and a link to its docs, whether it needs a key, its rate limits or terms that affect you, and which feature uses it. Include one real request you ran (the full URL) and the response you got, trimmed to the fields you'll use, in a code block.
