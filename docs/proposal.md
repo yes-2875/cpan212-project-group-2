@@ -1,3 +1,5 @@
+# PROJECT PROPOSAL
+
 ## 1. Problem and users
 This app is for anime fans who are looking for a way to track the multiple anime TV shows they have completed, dropped, put on hold, or are currently watching across various streaming platforms. Through the data provided by the Jikan-edge REST API, our app will facilitate the creation and editing of anime watchlists, solving the problem of forgetting which episode one was on, figuring out and organizing which anime one should watch next, and search animes all in a centralized hub.
 
@@ -107,7 +109,21 @@ Our application will use MongoDB to store users' personal wwanime lists and revi
 | GET    | `/api/external/anime` | Search the external anime API | 200     | 400, 502      |
 
 ## 6. Wireframes
-Unfinished
+
+### Wireframe of the homepage showing a list of every watchlist:
+![Wireframe of the homepage showing a list of every watchlist](wireframes/wireframe-list.png)
+
+### Wireframe of a detail page of an anime show:
+![Wireframe of a detail page of an anime show](wireframes/wireframe-detail.png)
+
+### Wireframe of the create page of a custom watchlist:
+![Wireframe of the create page of a custom watchlist](wireframes/wireframe-create.png)
+
+### Wireframe of the edit page of a custom watchlist:
+![Wireframe of the edit page of a custom watchlist](wireframes/wireframe-edit.png)
+
+### Wireframe of the edit page showing capabilities to edit the user's progress in an anime:
+![Wireframe of the edit page showing capabilities to edit the user's progress in an anime](wireframes/wireframe-edit-anime.png)
 
 ## 7. Team roles
 **API lead:** Zlata
@@ -116,8 +132,4 @@ Unfinished
 
 **Database lead (MongoDB):** Keziah
 
-## 8. Repo setup
-The public repo cpan212-project-group-<N> with the layout from section 3: api/ and web/ folders (a one-line README.md in each is enough for now), a root README.md with the app name, group number, and each member's name and GitHub username, and a .gitignore that covers node_modules/ and .env.
-
-## 9. Everyone commits, and CONTRIBUTIONS.md** has an M1 section.
-Every member has at least one commit from their own GitHub account, and the M1 section lists what each member wrote.
+## Contributions are listed in CONTRIBUTIONS.md at the root of the repository (step 9).
