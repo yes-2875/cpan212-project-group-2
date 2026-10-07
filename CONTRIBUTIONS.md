@@ -23,7 +23,7 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Mirza Baig (@yes-2875)
 **Completed items 6, 8, and 9:**
-- 6: Creation of wireframes in `docs/wireframes` (commit [0](0))
+- 6: Creation of wireframes in `docs/wireframes` (commit [b472fb758d7c44ddbae9f47125e5b8e5939c6065](https://github.com/yes-2875/cpan212-project-group-2/commit/b472fb758d7c44ddbae9f47125e5b8e5939c6065))
 - 8: Repository setup (commits [736abe6](https://github.com/yes-2875/cpan212-project-group-2/commit/736abe6a74c5437b0048bc847b744c4e2c23f851), [184c152](https://github.com/yes-2875/cpan212-project-group-2/commit/184c152845b580391aff8c207100215a086804e7))
 - 9: Writing of CONTRIBUTIONS.md in commit [a29c9c1](https://github.com/yes-2875/cpan212-project-group-2/commit/a29c9c1cd4a7d0bd50f16d20d48d5420c00a5cba)
 
