@@ -4,3 +4,8 @@
 - Mirza (@yes-2875)
 - Zlata (@ZlataSkotnyk)
 - Keziah (@thelonelycheeto)
+
+
+## AI use
+### M2
+- ChatGPT: explained how to install Express 5 and why branch push rejected.
