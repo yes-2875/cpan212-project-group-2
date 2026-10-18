@@ -1,74 +1,79 @@
 import { randomUUID } from 'node:crypto';
-import { animeList } from '../data/store.js';
+import { sampleUserId, watchlists } from '../data/store.js';
 
-// GET /api/anime
-export function getAllAnime(req, res) {
-  res.status(200).json(animeList);
+// GET /api/watchlists
+// Get all watchlists
+export function getAllWatchlists(req, res) {
+  res.status(200).json(watchlists);
 }
 
-// GET /api/anime/:id
-export function getAnimeById(req, res) {
-  const anime = animeList.find(
+// GET /api/watchlists/:id
+// Get one watchlist by ID
+export function getWatchlistById(req, res) {
+  const watchlist = watchlists.find(
     (item) => item._id === req.params.id
   );
 
-  if (!anime) {
+  if (!watchlist) {
     return res.status(404).json({
-      error: { message: 'Anime not found' }
+      error: { message: 'Watchlist not found' }
     });
   }
 
-  res.status(200).json(anime);
+  res.status(200).json(watchlist);
 }
 
-// POST /api/anime
-export function createAnime(req, res) {
-  const newAnime = {
+// POST /api/watchlists
+// Create a new watchlist
+export function createWatchlist(req, res) {
+  const newWatchlist = {
     _id: randomUUID(),
-    userId: 'sample-user',
-    ...req.body
+    userId: sampleUserId,
+    name: req.body.name,
+    description: req.body.description || ''
   };
 
-  animeList.push(newAnime);
+  watchlists.push(newWatchlist);
 
-  res.status(201).json(newAnime);
+  res.status(201).json(newWatchlist);
 }
 
-// PUT /api/anime/:id
-export function updateAnime(req, res) {
-  const index = animeList.findIndex(
+// PUT /api/watchlists/:id
+// Update a watchlist
+export function updateWatchlist(req, res) {
+  const index = watchlists.findIndex(
     (item) => item._id === req.params.id
   );
 
   if (index === -1) {
     return res.status(404).json({
-      error: { message: 'Anime not found' }
+      error: { message: 'Watchlist not found' }
     });
   }
 
-  animeList[index] = {
-    ...animeList[index],
-    ...req.body,
-    _id: animeList[index]._id,
-    userId: animeList[index].userId
+  watchlists[index] = {
+    ...watchlists[index],
+    name: req.body.name ?? watchlists[index].name,
+    description: req.body.description ?? watchlists[index].description
   };
 
-  res.status(200).json(animeList[index]);
+  res.status(200).json(watchlists[index]);
 }
 
-// DELETE /api/anime/:id
-export function deleteAnime(req, res) {
-  const index = animeList.findIndex(
+// DELETE /api/watchlists/:id
+// Delete a watchlist
+export function deleteWatchlist(req, res) {
+  const index = watchlists.findIndex(
     (item) => item._id === req.params.id
   );
 
   if (index === -1) {
     return res.status(404).json({
-      error: { message: 'Anime not found' }
+      error: { message: 'Watchlist not found' }
     });
   }
 
-  animeList.splice(index, 1);
+  watchlists.splice(index, 1);
 
   res.status(204).end();
 }
