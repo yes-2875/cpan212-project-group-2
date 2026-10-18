@@ -1,17 +1,17 @@
 import express from 'express';
-
-import animeRouter from './routes/anime.routes.js';
-import reviewsRouter from './routes/reviews.routes.js';
+import watchlistsRouter from './routes/watchlists.routes.js';
+import watchlistEntriesRouter from './routes/watchlistEntries.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Allow the server to read JSON request bodies
 app.use(express.json());
 
-// Connect the anime and review routes
-app.use('/api/anime', animeRouter);
-app.use('/api/reviews', reviewsRouter);
+// Watchlist routes
+app.use('/api/watchlists', watchlistsRouter);
+
+// Watchlist entry routes
+app.use('/api/watchlist-entries', watchlistEntriesRouter);
 
 // Handle unknown endpoints
 app.use((req, res) => {
@@ -22,7 +22,6 @@ app.use((req, res) => {
   });
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
