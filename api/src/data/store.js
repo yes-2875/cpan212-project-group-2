@@ -1,13 +1,29 @@
 import { randomUUID } from 'node:crypto';
 
-// A sample user shared by our anime and reviews
+// Sample user shared by the sample data
 export const sampleUserId = randomUUID();
 
-// Sample anime list items
-export const animeList = [
+// Sample watchlists
+export const watchlists = [
     {
         _id: randomUUID(),
         userId: sampleUserId,
+        name: 'My Favourite Anime',
+        description: 'Anime I really enjoy'
+    },
+    {
+        _id: randomUUID(),
+        userId: sampleUserId,
+        name: 'Anime to Watch Later',
+        description: 'Anime I want to watch in the future'
+    }
+];
+
+// Sample anime entries inside the watchlists
+export const watchlistEntries = [
+    {
+        _id: randomUUID(),
+        watchlistId: watchlists[0]._id,
         malId: 1,
         title: 'Cowboy Bebop',
         imageUrl: '',
@@ -18,7 +34,7 @@ export const animeList = [
     },
     {
         _id: randomUUID(),
-        userId: sampleUserId,
+        watchlistId: watchlists[0]._id,
         malId: 1535,
         title: 'Death Note',
         imageUrl: '',
@@ -29,7 +45,7 @@ export const animeList = [
     },
     {
         _id: randomUUID(),
-        userId: sampleUserId,
+        watchlistId: watchlists[1]._id,
         malId: 21,
         title: 'One Piece',
         imageUrl: '',
@@ -37,30 +53,5 @@ export const animeList = [
         currentEpisode: 0,
         status: 'Plan to Watch',
         score: 0
-    }
-];
-
-// Sample reviews linked to anime above
-export const reviews = [
-    {
-        _id: randomUUID(),
-        userId: sampleUserId,
-        animeListItemId: animeList[0]._id,
-        rating: 9,
-        comment: 'A great story with memorable characters.'
-    },
-    {
-        _id: randomUUID(),
-        userId: sampleUserId,
-        animeListItemId: animeList[1]._id,
-        rating: 10,
-        comment: 'An excellent thriller with many twists.'
-    },
-    {
-        _id: randomUUID(),
-        userId: sampleUserId,
-        animeListItemId: animeList[2]._id,
-        rating: 8,
-        comment: 'A fun adventure with lots of potential.'
     }
 ];
