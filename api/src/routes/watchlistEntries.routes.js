@@ -1,28 +1,28 @@
 import { Router } from 'express';
 
 import {
-    getAllReviews,
-    getReviewById,
-    createReview,
-    updateReview,
-    deleteReview
-} from '../controllers/reviews.controller.js';
+    getAllEntries,
+    getEntryById,
+    createEntry,
+    updateEntry,
+    deleteEntry
+} from '../controllers/watchlistEntries.controller.js';
 
 const router = Router();
 
-// GET /api/reviews
-router.get('/', getAllReviews);
+// GET /api/watchlist-entries
+router.get('/', getAllEntries);
 
-// GET /api/reviews/:id
-router.get('/:id', getReviewById);
+// GET /api/watchlist-entries/:id
+router.get('/:id', getEntryById);
 
-// POST /api/reviews
-router.post('/', createReview);
+// POST /api/watchlist-entries
+router.post('/', createEntry);
 
-// PUT /api/reviews/:id
-router.put('/:id', updateReview);
+// PUT /api/watchlist-entries/:id
+router.put('/:id', updateEntry);
 
-// DELETE /api/reviews/:id
-router.delete('/:id', deleteReview);
+// DELETE /api/watchlist-entries/:id
+router.delete('/:id', deleteEntry);
 
 export default router;
