@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import {
     getAllEntries,
     getEntryById,
@@ -8,21 +7,20 @@ import {
     deleteEntry
 } from '../controllers/watchlistEntries.controller.js';
 
+import { validate } from '../middleware/validate.js';
+import {
+    validateEntryCreate,
+    validateEntryUpdate
+} from '../schemas/validation.schemas.js';
+
 const router = Router();
 
-// GET /api/watchlist-entries
 router.get('/', getAllEntries);
-
-// GET /api/watchlist-entries/:id
 router.get('/:id', getEntryById);
 
-// POST /api/watchlist-entries
-router.post('/', createEntry);
+router.post('/', validate(validateEntryCreate), createEntry);
+router.put('/:id', validate(validateEntryUpdate), updateEntry);
 
-// PUT /api/watchlist-entries/:id
-router.put('/:id', updateEntry);
-
-// DELETE /api/watchlist-entries/:id
 router.delete('/:id', deleteEntry);
 
 export default router;

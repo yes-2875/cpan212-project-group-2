@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import {
     getAllWatchlists,
     getWatchlistById,
@@ -8,21 +7,20 @@ import {
     deleteWatchlist
 } from '../controllers/watchlists.controller.js';
 
+import { validate } from '../middleware/validate.js';
+import {
+    validateWatchlistCreate,
+    validateWatchlistUpdate
+} from '../schemas/validation.schemas.js';
+
 const router = Router();
 
-// GET /api/watchlists
 router.get('/', getAllWatchlists);
-
-// GET /api/watchlists/:id
 router.get('/:id', getWatchlistById);
 
-// POST /api/watchlists
-router.post('/', createWatchlist);
+router.post('/', validate(validateWatchlistCreate), createWatchlist);
+router.put('/:id', validate(validateWatchlistUpdate), updateWatchlist);
 
-// PUT /api/watchlists/:id
-router.put('/:id', updateWatchlist);
-
-// DELETE /api/watchlists/:id
 router.delete('/:id', deleteWatchlist);
 
 export default router;
