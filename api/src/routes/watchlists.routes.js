@@ -1,28 +1,28 @@
 import { Router } from 'express';
 
 import {
-    getAllAnime,
-    getAnimeById,
-    createAnime,
-    updateAnime,
-    deleteAnime
-} from '../controllers/anime.controller.js';
+    getAllWatchlists,
+    getWatchlistById,
+    createWatchlist,
+    updateWatchlist,
+    deleteWatchlist
+} from '../controllers/watchlists.controller.js';
 
 const router = Router();
 
-// GET /api/anime
-router.get('/', getAllAnime);
+// GET /api/watchlists
+router.get('/', getAllWatchlists);
 
-// GET /api/anime/:id
-router.get('/:id', getAnimeById);
+// GET /api/watchlists/:id
+router.get('/:id', getWatchlistById);
 
-// POST /api/anime
-router.post('/', createAnime);
+// POST /api/watchlists
+router.post('/', createWatchlist);
 
-// PUT /api/anime/:id
-router.put('/:id', updateAnime);
+// PUT /api/watchlists/:id
+router.put('/:id', updateWatchlist);
 
-// DELETE /api/anime/:id
-router.delete('/:id', deleteAnime);
+// DELETE /api/watchlists/:id
+router.delete('/:id', deleteWatchlist);
 
 export default router;
