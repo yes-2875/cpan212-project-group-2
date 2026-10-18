@@ -2,11 +2,57 @@
 const cache = new Map();
 const CACHE_TIMEOUT_MS = 60000; // 60 seconds cache expiry
 
-export function searchAnime(req, res, next) {
+export async function searchAnime(req, res, next) {
     const query = req.query.q;
-    const cacheKey = `anime_${query}`;
+    
+    if (!query) {
+        return res.status(400).json({
+            error: {
+                message: 'Validation failed',
+                details: { errors: {q: "Query parameter q is required"} }
+            }
+        });
+    }
+    
+    const cacheKey = `anime_search_${query}`;
     const now = Date.now();
     
+    if (cache.has(cacheKey)) {
+        const cachedResult = cache.get(cacheKey);
+        
+        if (cachedResult.expiresAt > now) {
+            
+            // Log cache hit to terminal and return cached item
+            console.log(`[Cache Hit] Serving external API data from cache for ${query}`);
+            return res.status(200).json({
+                data: cachedResult.data,
+                meta: { cached: true, fetchedAt: cachedResult.fetchedAt }
+            });
+        }
+    }
     
-    const url = `https://jikan.lucashdo.com/v1/anime?q=${encodeURIComponent(query)}`
+    
+    // Try-catch to fetch with AbortSignal timeout, add result to Map cache if not already there
+    try {
+        const url = `https://jikan.lucashdo.com/v1/anime?q=${encodeURIComponent(query)}`
+        const response = await fetch(url, {signal: AbortSignal.timeout(4000)});
+        
+        
+    } catch (err) {
+        
+        // Log API timeout error if the request was timed out, pass onto error handler
+        if (err.name === 'AbortError' || err.name === 'TimeoutError') {
+            
+            const timeoutErr = new Error('External API request timed out');
+            timeoutErr.status = 504;
+            timeoutErr.details = {timeoutMs: 4000};
+            return next(timeoutErr);
+        }
+        
+        // Log general error if the request was not timed out
+        const apiErr = new Error('Failed to connect to jikan-edge API');
+        apiErr.status = 502;
+        apiErr.details = {message: err.message}
+        return next(apiErr);
+    }
 }
