@@ -6,13 +6,13 @@ export const sampleUserId = randomUUID();
 // Sample watchlists
 export const watchlists = [
     {
-        _id: randomUUID(),
+        _id: "1",
         userId: sampleUserId,
         name: 'My Favourite Anime',
         description: 'Anime I really enjoy'
     },
     {
-        _id: randomUUID(),
+        _id: "2",
         userId: sampleUserId,
         name: 'Anime to Watch Later',
         description: 'Anime I want to watch in the future'
@@ -22,8 +22,8 @@ export const watchlists = [
 // Sample anime entries inside the watchlists
 export const watchlistEntries = [
     {
-        _id: randomUUID(),
-        watchlistId: watchlists[0]._id,
+        _id: "1",
+        watchlistId: "1",
         malId: 1,
         title: 'Cowboy Bebop',
         imageUrl: '',
@@ -33,8 +33,8 @@ export const watchlistEntries = [
         score: 9
     },
     {
-        _id: randomUUID(),
-        watchlistId: watchlists[0]._id,
+        _id: "2",
+        watchlistId: "1",
         malId: 1535,
         title: 'Death Note',
         imageUrl: '',
@@ -44,8 +44,8 @@ export const watchlistEntries = [
         score: 10
     },
     {
-        _id: randomUUID(),
-        watchlistId: watchlists[1]._id,
+        _id: "3",
+        watchlistId: "2",
         malId: 21,
         title: 'One Piece',
         imageUrl: '',

@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { watchlists, watchlistEntries } from '../data/store.js';
 
+let count = watchlistEntries.length + 1
+
 // GET /api/watchlist-entries
 // Get all anime entries
 export function getAllEntries(req, res) {
@@ -41,6 +43,10 @@ export function createEntry(req, res, next) {
     const watchlistExists = watchlists.some(
         (item) => item._id === watchlistId
     );
+    
+    const entryExists = watchlistEntries.some(
+        (item) => item.malId === malId && item.watchlistId === watchlistId
+    );
 
     if (!watchlistExists) {
         const err = new Error('A valid watchlistId is required');
@@ -48,9 +54,17 @@ export function createEntry(req, res, next) {
         err.details = {watchlistId: watchlistId};
         return next(err);
     }
+    
+    // Check for duplicate watchlist entries in the same watchlist
+    if (entryExists) {
+        const err = new Error(`This entry already exists in watchlist`);
+        err.status = 409;
+        err.details = {watchlistId: watchlistId, malId};
+        return next(err);
+    }
 
     const newEntry = {
-        _id: randomUUID(),
+        _id: count.toString(),
         watchlistId,
         malId,
         title,
@@ -62,7 +76,8 @@ export function createEntry(req, res, next) {
     };
 
     watchlistEntries.push(newEntry);
-
+    
+    count++;
     res.status(201).json(newEntry);
 }
 

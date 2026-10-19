@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { sampleUserId, watchlists } from '../data/store.js';
 
+let count = watchlists.length + 1;
+
 // GET /api/watchlists
 // Get all watchlists
 export function getAllWatchlists(req, res) {
@@ -28,13 +30,14 @@ export function getWatchlistById(req, res, next) {
 // Create a new watchlist
 export function createWatchlist(req, res) {
   const newWatchlist = {
-    _id: randomUUID(),
+    _id: count.toString(),
     userId: sampleUserId,
     name: req.body.name,
     description: req.body.description || ''
   };
 
   watchlists.push(newWatchlist);
+  count++;
 
   res.status(201).json(newWatchlist);
 }
