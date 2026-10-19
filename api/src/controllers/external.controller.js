@@ -28,6 +28,8 @@ export async function searchAnime(req, res, next) {
                 data: cachedResult.data,
                 meta: { cached: true, fetchedAt: cachedResult.fetchedAt }
             });
+        } else {
+            cache.delete(cacheKey); // Delete cached item if it's expired
         }
     }
     
@@ -37,6 +39,38 @@ export async function searchAnime(req, res, next) {
         const url = `https://jikan.lucashdo.com/v1/anime?q=${encodeURIComponent(query)}`
         const response = await fetch(url, {signal: AbortSignal.timeout(4000)});
         
+        if (!response.ok) {
+            const err = new Error('jikan-edge API responded with an error');
+            err.status = 502;
+            err.details = { upstreamStatus: response.status };
+            return next(err);
+        }
+        
+        const rawData = await response.json();
+        
+        // Create our own simplified JSON shape to return from external API
+        const simplified = (rawData.data || []).map(anime => ({
+            id: anime.malId,
+            title: anime.title,
+            imageUrl: anime.imageUrl || null,
+            episodes: anime.episodes,
+            score: anime.score,
+            year: anime.year,
+            synopsis: anime.synopsis,
+        }));
+        
+        // Add item to cache
+        cache.set(cacheKey, {
+            data: simplified,
+            expiresAt: now + CACHE_TIMEOUT_MS,
+            fetchedAt: new Date().toISOString()
+        });
+        
+        // Return data and meta
+        return res.status(200).json({
+            data: simplified,
+            meta: { cached: false, fetchedAt: new Date().toISOString() }
+        });
         
     } catch (err) {
         
