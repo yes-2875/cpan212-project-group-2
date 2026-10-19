@@ -9,15 +9,16 @@ export function getAllWatchlists(req, res) {
 
 // GET /api/watchlists/:id
 // Get one watchlist by ID
-export function getWatchlistById(req, res) {
+export function getWatchlistById(req, res, next) {
   const watchlist = watchlists.find(
     (item) => item._id === req.params.id
   );
 
   if (!watchlist) {
-    return res.status(404).json({
-      error: { message: 'Watchlist not found' }
-    });
+    const err = new Error('Watchlist not found');
+    err.status = 404;
+    err.details = {id: req.params.id};
+    return next(err);
   }
 
   res.status(200).json(watchlist);
@@ -40,15 +41,17 @@ export function createWatchlist(req, res) {
 
 // PUT /api/watchlists/:id
 // Update a watchlist
-export function updateWatchlist(req, res) {
+export function updateWatchlist(req, res, next) {
   const index = watchlists.findIndex(
     (item) => item._id === req.params.id
   );
 
   if (index === -1) {
-    return res.status(404).json({
-      error: { message: 'Watchlist not found' }
-    });
+    
+    const err = new Error('Watchlist not found');
+    err.status = 404;
+    err.details = {id: req.params.id};
+    return next(err);
   }
 
   watchlists[index] = {
@@ -62,15 +65,16 @@ export function updateWatchlist(req, res) {
 
 // DELETE /api/watchlists/:id
 // Delete a watchlist
-export function deleteWatchlist(req, res) {
+export function deleteWatchlist(req, res, next) {
   const index = watchlists.findIndex(
     (item) => item._id === req.params.id
   );
 
   if (index === -1) {
-    return res.status(404).json({
-      error: { message: 'Watchlist not found' }
-    });
+    const err = new Error('Watchlist not found');
+    err.status = 404;
+    err.details = {id: req.params.id};
+    return next(err);
   }
 
   watchlists.splice(index, 1);

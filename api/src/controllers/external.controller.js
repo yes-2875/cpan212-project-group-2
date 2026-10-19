@@ -6,12 +6,11 @@ export async function searchAnime(req, res, next) {
     const query = req.query.q;
     
     if (!query) {
-        return res.status(400).json({
-            error: {
-                message: 'Validation failed',
-                details: { errors: {q: "Query parameter q is required"} }
-            }
-        });
+        const err = new Error('Validation failed');
+        err.details = {errors: {q: 'Query parameter q is required'}};
+        err.status = 400;
+        
+        return next(err);
     }
     
     const cacheKey = `anime_search_${query}`;

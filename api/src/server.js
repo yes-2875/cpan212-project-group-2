@@ -20,7 +20,7 @@ app.use('/api/anime', externalRouter);
 
 // Handle unknown endpoints and pass onto errorHandler
 app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.baseUrl}: Endpoint not found`)
+  const error = new Error(`${req.method} ${req.originalUrl}: Endpoint not found`);
   error.status = 404;
   
   next(error);

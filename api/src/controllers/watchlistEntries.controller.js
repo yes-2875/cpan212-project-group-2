@@ -9,15 +9,16 @@ export function getAllEntries(req, res) {
 
 // GET /api/watchlist-entries/:id
 // Get one anime entry by ID
-export function getEntryById(req, res) {
+export function getEntryById(req, res, next) {
     const entry = watchlistEntries.find(
         (item) => item._id === req.params.id
     );
 
     if (!entry) {
-        return res.status(404).json({
-            error: { message: 'Watchlist entry not found' }
-        });
+        const err = new Error('Watchlist entry not found');
+        err.status = 404;
+        err.details = {id: req.params.id};
+        return next(err);
     }
 
     res.status(200).json(entry);
@@ -25,7 +26,7 @@ export function getEntryById(req, res) {
 
 // POST /api/watchlist-entries
 // Add an anime to a watchlist
-export function createEntry(req, res) {
+export function createEntry(req, res, next) {
     const {
         watchlistId,
         malId,
@@ -42,9 +43,10 @@ export function createEntry(req, res) {
     );
 
     if (!watchlistExists) {
-        return res.status(400).json({
-            error: { message: 'A valid watchlistId is required' }
-        });
+        const err = new Error('A valid watchlistId is required');
+        err.status = 400;
+        err.details = {watchlistId: watchlistId};
+        return next(err);
     }
 
     const newEntry = {
@@ -66,15 +68,17 @@ export function createEntry(req, res) {
 
 // PUT /api/watchlist-entries/:id
 // Update an anime entry
-export function updateEntry(req, res) {
+export function updateEntry(req, res, next) {
     const index = watchlistEntries.findIndex(
         (item) => item._id === req.params.id
     );
 
     if (index === -1) {
-        return res.status(404).json({
-            error: { message: 'Watchlist entry not found' }
-        });
+        
+        const err = new Error('Watchlist entry not found');
+        err.status = 404;
+        err.details = {id: req.params.id};
+        return next(err);
     }
 
     const {
@@ -94,9 +98,10 @@ export function updateEntry(req, res) {
         );
 
         if (!watchlistExists) {
-            return res.status(400).json({
-                error: { message: 'A valid watchlistId is required' }
-            });
+            const err = new Error('A valid watchlistId is required');
+            err.status = 404;
+            err.details = {watchlistId: watchlistId};
+            return next(err);
         }
     }
 
@@ -117,15 +122,16 @@ export function updateEntry(req, res) {
 
 // DELETE /api/watchlist-entries/:id
 // Remove an anime entry
-export function deleteEntry(req, res) {
+export function deleteEntry(req, res, next) {
     const index = watchlistEntries.findIndex(
         (item) => item._id === req.params.id
     );
 
     if (index === -1) {
-        return res.status(404).json({
-            error: { message: 'Watchlist entry not found' }
-        });
+        const err = new Error('Watchlist entry not found');
+        err.status = 404;
+        err.details = {id: req.params.id};
+        return next(err);
     }
 
     watchlistEntries.splice(index, 1);

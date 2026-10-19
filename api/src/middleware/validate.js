@@ -3,12 +3,11 @@ export function validate(schema) {
     const errors = schema(req.body);
 
     if (Object.keys(errors).length > 0) {
-      return res.status(400).json({
-        error: {
-          message: 'Validation failed',
-          details: errors
-        }
-      });
+      
+      const err = new Error('Validation failed');
+      err.status = 400;
+      err.details = errors;
+      return next(err);
     }
 
     next();
