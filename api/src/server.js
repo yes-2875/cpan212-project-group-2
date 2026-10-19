@@ -14,6 +14,9 @@ app.use('/api/watchlists', watchlistsRouter);
 // Watchlist entry routes
 app.use('/api/watchlist-entries', watchlistEntriesRouter);
 
+// External API searching route
+app.use('api/anime')
+
 // Handle unknown endpoints and pass onto errorHandler
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.baseUrl}: Endpoint not found`)

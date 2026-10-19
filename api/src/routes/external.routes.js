@@ -3,6 +3,6 @@ import { searchAnime } from "../controllers/external.controller.js";
 
 const router = Router();
 
-router.get('/anime', searchAnime);
+router.get('/search', searchAnime);
 
 export default router;
