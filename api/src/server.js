@@ -1,7 +1,8 @@
 import express from 'express';
 import watchlistsRouter from './routes/watchlists.routes.js';
-import errorHandler from './middleware/errorHandler.js';
 import watchlistEntriesRouter from './routes/watchlistEntries.routes.js';
+import externalRouter from './routes/external.routes.js';
+import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,7 +16,7 @@ app.use('/api/watchlists', watchlistsRouter);
 app.use('/api/watchlist-entries', watchlistEntriesRouter);
 
 // External API searching route
-app.use('api/anime')
+app.use('/api/anime', externalRouter);
 
 // Handle unknown endpoints and pass onto errorHandler
 app.use((req, res, next) => {
