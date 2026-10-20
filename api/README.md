@@ -55,3 +55,38 @@ curl -i -X POST "http://localhost:4000/api/watchlists-entries/" \
 -H "Content-Type: application/json" \
 -d '{"watchlistId":"2","malId":2}'
 Expected status code: 404 Not Found
+
+## How to run API
+1. cd api
+2. npm install
+3. npm run dev
+4. curl -i "http://localhost:4000/api/anime/search?q=naruto"
+
+## Environment variables
+PORT = 4000
+
+## Table of endpoints
+
+### GET
+/api/anime/search
+
+/api/watchlist-entries/
+/api/watchlist-entries/:id
+
+/api/watchlists/
+/api/watchlists/:id
+
+### POST
+/api/watchlist-entries/
+
+/api/watchlists/
+
+### PUT
+/api/watchlist-entries/:id
+
+/api/watchlists/:id
+
+### DELETE
+/api/watchlist-entries/:id
+
+/api/watchlists/:id

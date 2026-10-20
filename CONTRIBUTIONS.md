@@ -35,7 +35,8 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 ## M2: Express REST API
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
-**Completed items 0, 0, 0:**
+**Completed items 2, 3, 4:**
+- Pull requests #4 and #5
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0):
 
@@ -43,13 +44,13 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 
 ### Keziah Corpuz (@cheetochiyo)
-**Completed items 0, 0, 0:**
+**Completed items 1, 8, 9:**
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
 
 **Contributions were merged in pull request #0**
 
 ### Mirza Baig (@yes-2875)
-**Completed items 0, 0, 0:**
+**Completed items 5, 6, 7:**
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
