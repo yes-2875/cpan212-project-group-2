@@ -8,3 +8,4 @@
 ## AI use
 ### M2
 - ChatGPT: explained how to install Express 5 and why branch push rejected.
+- Gemini: explained how Map caching works for external API endpoint. Diagnosed 404 Not Found error when testing external API endpoint (was missing a forward slash in a router file).
