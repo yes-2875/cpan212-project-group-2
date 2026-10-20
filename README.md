@@ -3,8 +3,7 @@
 # CPAN 212 Group 2 Project Members:
 - Mirza (@yes-2875)
 - Zlata (@ZlataSkotnyk)
-- Keziah (@thelonelycheeto)
-
+- Keziah (@cheetochiyo)
 
 ## AI use
 ### M2
