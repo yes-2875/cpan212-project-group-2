@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:4000/watchlist-entries
+  url: http://localhost:4000/api/watchlist-entries
   auth: inherit
 
 settings:
