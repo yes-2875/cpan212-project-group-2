@@ -36,6 +36,10 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
 **Completed items 2, 3, 4:**
+- 2: Two resources with full CRUD
+- 3: Routers
+- 4: Validation
+
 - Pull requests #4 and #5
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0):
@@ -45,6 +49,9 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 8, 9:**
+- 1: Project setup
+- 8: curl tests
+- 9: README and CONTRIBUTIONS.md
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
 
@@ -52,5 +59,8 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Mirza Baig (@yes-2875)
 **Completed items 5, 6, 7:**
+- 5: Error handling
+- 6: Status codes
+- 7: External API
 
 [0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
