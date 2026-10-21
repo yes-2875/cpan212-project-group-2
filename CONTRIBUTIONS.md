@@ -35,21 +35,29 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 ## M2: Express REST API
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
-**Completed items 0, 0, 0:**
+**Completed items 2, 3, 4:**
+- 2: Two resources with full CRUD
+- 3: Routers
+- 4: Validation
 
-[0](https://github.com/yes-2875/cpan212-project-group-2/commit/0):
-
-**Contributions were merged in pull request #0**
+**Contributions were merged in pull request #4 and #5**
 
 
 ### Keziah Corpuz (@cheetochiyo)
-**Completed items 0, 0, 0:**
+**Completed items 1, 8, 9:**
+- 1: Initial project setup
+- 8: cURL tests in `api/README.md`
+- 9: `README.md` and `CONTRIBUTIONS.md` (M2 section)
 
-[0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
+**Contributions were merged in pull request #6**
 
-**Contributions were merged in pull request #0**
 
 ### Mirza Baig (@yes-2875)
-**Completed items 0, 0, 0:**
+**Completed items 5, 6, 7:**
+- 5: Error handling
+- 6: Status codes
+- 7: External API endpoint + caching
+- Added Bruno test folder for live demo (commits [b86e82f](https://github.com/yes-2875/cpan212-project-group-2/commit/b86e82f394afc36d2fa7f22ce142ff776898abac) and [48601c2](https://github.com/yes-2875/cpan212-project-group-2/commit/48601c2de67babe6800259df6350ddaf7f2f06fe))
 
-[0](https://github.com/yes-2875/cpan212-project-group-2/commit/0)
+**Smaller revision and editing of contributions:**
+- Commit [0](https://github.com/yes-2875/cpan212-project-group-2/commit/)
