@@ -35,6 +35,7 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 ## M2: Express REST API
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
+
 **Completed items 2, 3, 4:**
 - 2: Two resources with full CRUD
 - 3: Routers
@@ -45,19 +46,19 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 8, 9:**
-- 1: Initial project setup
-- 8: cURL tests in `api/README.md`
-- 9: `README.md` and `CONTRIBUTIONS.md` (M2 section)
+- 1: Initial project setup (commits [2b4de7a](https://github.com/yes-2875/cpan212-project-group-2/commit/2b4de7a1725012edb49690c5bdae5d4e71fa5858))
+- 8: cURL tests in `api/README.md` ([34cf608](https://github.com/yes-2875/cpan212-project-group-2/commit/34cf60837fcc86bf870064720679da403b39080a), [37b200f](https://github.com/yes-2875/cpan212-project-group-2/commit/37b200f4ad423a1a3190ab548ae67b15085ce030))
+- 9: `README.md` and `CONTRIBUTIONS.md` (M2 section) ([2b6cf68](https://github.com/yes-2875/cpan212-project-group-2/commit/2b6cf68c6b159b8502cc209be977177ee432d361), [f6cf0e0](https://github.com/yes-2875/cpan212-project-group-2/commit/f6cf0e0b98f42d68e7694a54d7b16504b75eef5e))
 
 **Contributions were merged in pull request #6**
 
 
 ### Mirza Baig (@yes-2875)
 **Completed items 5, 6, 7:**
-- 5: Error handling
+- 5: Error handling middleware (commits [64dbc9e](https://github.com/yes-2875/cpan212-project-group-2/commit/64dbc9e9ce0bd11708b32897df83032b94be926b), [72d3a37](https://github.com/yes-2875/cpan212-project-group-2/commit/72d3a37cb7dac16d38b5efff6931a1e8d3694574), [79db3e1](https://github.com/yes-2875/cpan212-project-group-2/commit/79db3e1abccfd2a329cb3b4f5964da126a104336), [752db10](https://github.com/yes-2875/cpan212-project-group-2/commit/752db10722962e9206658cc5d268102c2585bfc9))
 - 6: Status codes
-- 7: External API endpoint + caching
+- 7: External API endpoint + caching (commits [6255201](https://github.com/yes-2875/cpan212-project-group-2/commit/6255201ff34224ccc02b85f408b2e7d4427e2b49), [cceb6b4](https://github.com/yes-2875/cpan212-project-group-2/commit/cceb6b4cc4a37ef66576bfa63de056c94f1c9306), [9d0cd67](https://github.com/yes-2875/cpan212-project-group-2/commit/9d0cd67fb1dfbc19738419fbbefb614dd23431e0), [38453c2](https://github.com/yes-2875/cpan212-project-group-2/commit/38453c27716ccf45cc67f746711b110ec28d2368))
 - Added Bruno test folder for live demo (commits [b86e82f](https://github.com/yes-2875/cpan212-project-group-2/commit/b86e82f394afc36d2fa7f22ce142ff776898abac) and [48601c2](https://github.com/yes-2875/cpan212-project-group-2/commit/48601c2de67babe6800259df6350ddaf7f2f06fe))
 
 **Smaller revision and editing of contributions:**
-- Commit [0](https://github.com/yes-2875/cpan212-project-group-2/commit/)
+- Commits [88c62fc](https://github.com/yes-2875/cpan212-project-group-2/commit/88c62fc06637b5277f411a838f67ef93626a88e7), [fabb218](https://github.com/yes-2875/cpan212-project-group-2/commit/fabb2183ba677081d52e6b62a231d26115e69bd9)
