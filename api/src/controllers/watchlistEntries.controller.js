@@ -1,3 +1,4 @@
+import { HttpError } from '../lib/httpError.js';
 import { randomUUID } from 'node:crypto';
 import { watchlists, watchlistEntries } from '../data/store.js';
 
