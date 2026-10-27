@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { watchlists, watchlistEntries } from '../data/store.js';
 
-let count = watchlistEntries.length + 1
+//let count = watchlistEntries.length + 1
 
 // GET /api/watchlist-entries
 // Get all anime entries
@@ -17,10 +17,7 @@ export function getEntryById(req, res, next) {
     );
 
     if (!entry) {
-        const err = new Error('Watchlist entry not found');
-        err.status = 404;
-        err.details = {id: req.params.id};
-        return next(err);
+        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
     }
 
     res.status(200).json(entry);
@@ -49,22 +46,16 @@ export function createEntry(req, res, next) {
     );
 
     if (!watchlistExists) {
-        const err = new Error('A valid watchlistId is required');
-        err.status = 400;
-        err.details = {watchlistId: watchlistId};
-        return next(err);
+        throw new HttpError(400, 'A valid watchlistId is required', {watchlistId});
     }
     
     // Check for duplicate watchlist entries in the same watchlist
     if (entryExists) {
-        const err = new Error(`This entry already exists in watchlist`);
-        err.status = 409;
-        err.details = {watchlistId: watchlistId, malId};
-        return next(err);
+        throw new HttpError(409, 'This entry already exists in watchlist', {watchlistId, malId});
     }
 
     const newEntry = {
-        _id: count.toString(),
+        _id: crypto.randomUUID(),
         watchlistId,
         malId,
         title,
@@ -77,7 +68,7 @@ export function createEntry(req, res, next) {
 
     watchlistEntries.push(newEntry);
     
-    count++;
+    //count++;
     res.status(201).json(newEntry);
 }
 
@@ -89,11 +80,7 @@ export function updateEntry(req, res, next) {
     );
 
     if (index === -1) {
-        
-        const err = new Error('Watchlist entry not found');
-        err.status = 404;
-        err.details = {id: req.params.id};
-        return next(err);
+        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
     }
 
     const {
@@ -113,10 +100,7 @@ export function updateEntry(req, res, next) {
         );
 
         if (!watchlistExists) {
-            const err = new Error('A valid watchlistId is required');
-            err.status = 404;
-            err.details = {watchlistId: watchlistId};
-            return next(err);
+            throw new HttpError(404, 'A valid watchlistId is required', {watchlistId});
         }
     }
 
@@ -143,10 +127,7 @@ export function deleteEntry(req, res, next) {
     );
 
     if (index === -1) {
-        const err = new Error('Watchlist entry not found');
-        err.status = 404;
-        err.details = {id: req.params.id};
-        return next(err);
+        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
     }
 
     watchlistEntries.splice(index, 1);

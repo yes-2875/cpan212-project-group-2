@@ -6,11 +6,7 @@ export async function searchAnime(req, res, next) {
     const query = req.query.q;
     
     if (!query) {
-        const err = new Error('Validation failed');
-        err.details = {errors: {q: 'Query parameter q is required'}};
-        err.status = 400;
-        
-        return next(err);
+        throw new HttpError(400, 'Validation failed', {q: 'Query parameter q is required'});
     }
     
     const cacheKey = `anime_search_${query}`;
@@ -39,10 +35,7 @@ export async function searchAnime(req, res, next) {
         const response = await fetch(url, {signal: AbortSignal.timeout(4000)});
         
         if (!response.ok) {
-            const err = new Error('jikan-edge API responded with an error');
-            err.status = 502;
-            err.details = { upstreamStatus: response.status };
-            return next(err);
+            throw new HttpError(502, 'jikan-edge API responded with an error', {upstreamStatus: response.status});
         }
         
         const rawData = await response.json();
@@ -73,13 +66,24 @@ export async function searchAnime(req, res, next) {
         
     } catch (err) {
         
+        // Don't keep HttpErrors trapped in the try-catch loop, throw them to the error handler
+        if (err instanceof HttpError) {
+            throw err;
+        }
+        
         // Log API timeout error if the request was timed out, pass onto error handler
         if (err.name === 'AbortError' || err.name === 'TimeoutError') {
-            
-            const timeoutErr = new Error('External API request timed out');
-            timeoutErr.status = 504;
-            timeoutErr.details = {timeoutMs: 4000};
-            return next(timeoutErr);
+            throw new HttpError(504, 'External API request timed out', {timeoutMs: 4000});
+        }
+        
+        // Log error if the JSON response was invalid
+        if (err.name === 'SyntaxError') {
+            throw new HttpError(502, `Failed to fetch External API: Not JSON (${err.message})`);
+        }
+        
+        // Throw error for network failures (no response, unknown host, refused connection, no network)
+        if (err.name === 'TypeError' && err.message === 'fetch failed') {
+            throw new HttpError(502, `Network failoure on jikan-edge API: ${err.cause}`);
         }
         
         // Log general error if the request was not timed out

@@ -1,4 +1,4 @@
-import { HttpError } from "../lib/httpError";
+import { HttpError } from "../lib/httpError.js";
 
 // Global middleware to handle all errors thrown and return a JSON shape,
 // including unknown endpoints, external API errors and bugs in the server

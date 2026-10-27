@@ -1,3 +1,4 @@
+import { HttpError } from '../lib/httpError.js';
 import { randomUUID } from 'node:crypto';
 import { sampleUserId, watchlists } from '../data/store.js';
 
@@ -17,10 +18,7 @@ export function getWatchlistById(req, res, next) {
   );
 
   if (!watchlist) {
-    const err = new Error('Watchlist not found');
-    err.status = 404;
-    err.details = {id: req.params.id};
-    return next(err);
+    throw new HttpError(404, 'Watchlist not found', {id: req.params.id});
   }
 
   res.status(200).json(watchlist);
@@ -50,11 +48,7 @@ export function updateWatchlist(req, res, next) {
   );
 
   if (index === -1) {
-    
-    const err = new Error('Watchlist not found');
-    err.status = 404;
-    err.details = {id: req.params.id};
-    return next(err);
+    throw new HttpError(404, 'Watchlist not found', {id: req.params.id});
   }
 
   watchlists[index] = {
@@ -74,10 +68,7 @@ export function deleteWatchlist(req, res, next) {
   );
 
   if (index === -1) {
-    const err = new Error('Watchlist not found');
-    err.status = 404;
-    err.details = {id: req.params.id};
-    return next(err);
+    throw new HttpError(404, 'Watchlist not found', {id: req.params.id});
   }
 
   watchlists.splice(index, 1);
