@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: var(--header);
+    color: var(--foreground);
+}
+
+.nav {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 24px;
+    align-items: center;
+    
+    > a:hover {
+        text-decoration: underline;
+    }
+}
+
+.logo {
+    object-fit: contain;
+    display: flex;
+    font-family: Inter, var(--font-geist-sans);
+    flex-direction: row;
+    flex-basis: 300px;
+    font-size: 3em;
+    font-weight: 1000;
+    gap: 24px;
+}
