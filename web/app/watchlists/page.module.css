@@ -1,0 +1,8 @@
+h1.title {
+  font-size: 6em;
+}
+
+.highlight {
+  color: var(--accent);
+  display: inline;
+}
