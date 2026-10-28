@@ -1,4 +1,5 @@
 import { getWatchlistById } from '@/lib/api';
+import { notFound } from 'next/navigation';
 import styles from '../page.module.css';
 
 export default async function WatchlistDetail({ params }) {
