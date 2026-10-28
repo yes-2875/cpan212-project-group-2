@@ -14,9 +14,22 @@
     justify-content: flex-end;
     gap: 24px;
     align-items: center;
-    
+    > a {
+        background-color: var(--button-neutral-bg);
+        border: 1px solid var(--button-neutral-border);
+        border-radius: 0.2em;
+        padding: 0.2em 0.5em;
+        
+        transition-property: background-color font-weight;
+        transition: 0.1s ease-out;
+    }
     > a:hover {
-        text-decoration: underline;
+        background-color: var(--button-neutral-hover);
+        font-weight: bold;
+    }
+    > a:active {
+        background-color: var(--accent);
+        color: var(--foreground);
     }
 }
 
@@ -28,5 +41,36 @@
     flex-basis: 300px;
     font-size: 3em;
     font-weight: 1000;
-    gap: 24px;
+    gap: 12px;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 60px 120px;
+
+    p {
+        font-size: 1.5em;
+    }
+
+    h1 {
+        font-size: 4em;
+        margin-block-end: 0.1em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 3em;
+        font-weight: 700;
+        margin-block-end: 0.1em;
+    }
+
+    h3 {
+        font-size: 2em;
+        font-weight: 600;
+    }
 }

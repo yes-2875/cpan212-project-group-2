@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       <body>
         <header className={styles.header}>
           <Link className={styles.logo} href='/'>
-            <Image src='logo.svg' width={64} height={64}/>
+            <Image src='logo.svg' width={64} height={64} alt="Logo"/>
             Yumi
           </Link>
           <nav className={styles.nav}>
@@ -37,7 +37,9 @@ export default function RootLayout({ children }) {
             <Link href='/search'>Search Anime</Link>
           </nav>
         </header>
-        {children}
+        <main className={styles.main}>
+          {children}
+        </main>
       </body>
     </html>
   );
