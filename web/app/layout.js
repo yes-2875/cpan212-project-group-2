@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       <body>
         <header className={styles.header}>
           <Link className={styles.logo} href='/'>
-            <Image src='logo.svg' width={64} height={64} alt="Logo"/>
+            <Image src='/logo.svg' width={64} height={64} alt="Logo"/>
             Yumi
           </Link>
           <nav className={styles.nav}>
