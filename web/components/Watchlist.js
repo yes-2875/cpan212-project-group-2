@@ -8,7 +8,7 @@ export default async function Watchlist({watchlist}) {
     <div className={styles.watchlist}>
       {/* TODO: create Watchlist component to display inside /watchlists/ */}
       <h1>{watchlist.name}</h1>
-      {watchlist.description && <p>{watchlist.description}</p>}
+      {watchlist.description && <p className={styles.description}>{watchlist.description}</p>}
       
       <div className={styles.entryCards}>
         {entries.map((entry) => (

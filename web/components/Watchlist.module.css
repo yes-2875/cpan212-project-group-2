@@ -3,14 +3,19 @@
   flex-direction: column;
   align-items: stretch;
   padding: 0.5em;
-  
+  gap: 0.5em;
   
   background-color: var(--container);
   border: 1px solid var(--muted);
   border-radius: 1em;
 }
 
+.description {
+  color: var(--muted);
+}
+
 .entryCards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0.5em;
 }
