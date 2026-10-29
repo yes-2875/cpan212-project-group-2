@@ -1,3 +1,5 @@
+import {HttpError} from "../lib/httpError.js";
+
 // Initialize a new Map object to use as a cache
 const cache = new Map();
 const CACHE_TIMEOUT_MS = 60000; // 60 seconds cache expiry
