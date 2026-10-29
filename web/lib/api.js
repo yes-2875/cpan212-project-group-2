@@ -20,15 +20,54 @@ export const getWatchlists = async () => {
 };
 
 export const getWatchlistById = async (id) => {
-  // TODO (Zlata): needs to be implemented
+  try {
+    const response = await fetch(`${API_ORIGIN}/api/watchlists/${id}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch watchlist');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching watchlist:', error);
+    return null;
+  }
 };
 
 export const getWatchlistEntries = async () => {
-  // TODO (Zlata): needs to be implemented
+  try {
+    const response = await fetch(`${API_ORIGIN}/api/watchlist-entries`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch watchlist entries');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching watchlist entries:', error);
+    return null;
+  }
 };
 
 export const getWatchlistEntryById = async (id) => {
-  // TODO (Zlata): needs to be implemented
+  try {
+    const response = await fetch(`${API_ORIGIN}/api/watchlist-entries/${id}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch watchlist entry');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching watchlist entry:', error);
+    return null;
+  }
 };
 
 export const searchAnime = async (q) => {
