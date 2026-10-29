@@ -4,6 +4,14 @@ const nextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   agentRules: false,
+  images: {
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'cdn.myanimelist.net',
+      port: '',
+      
+    }]
+  },
   turbopack: {root: import.meta.dirname},
   
   // TODO (Kez): implement API rewrite to route any /api/ requests from this frontend
