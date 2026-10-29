@@ -10,6 +10,8 @@
   
   text-align: center;
   position: relative;
+  
+  box-shadow: 0 0px 1em var(--background);
 }
 
 .image {
