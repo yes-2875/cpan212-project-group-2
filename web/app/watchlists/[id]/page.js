@@ -1,4 +1,5 @@
 import { getWatchlistById } from '@/lib/api';
+import Watchlist from '@/components/Watchlist';
 import { notFound } from 'next/navigation';
 import styles from '../page.module.css';
 
@@ -18,11 +19,7 @@ export default async function WatchlistDetail({ params }) {
   
   return (
     <section>
-      <h1 className={styles.title}>Watchlist Name</h1>
-      <h1>ID: {routeParams.id}</h1>
-      <h2>Header2</h2>
-      <h3>Header3</h3>
-      <p>Paragraph Text</p>
+      <Watchlist watchlist={watchlist} />
     </section>
   );
 }

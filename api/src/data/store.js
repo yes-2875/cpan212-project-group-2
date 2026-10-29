@@ -37,7 +37,7 @@ export const watchlistEntries = [
         watchlistId: "1",
         malId: 1535,
         title: 'Death Note',
-        imageUrl: '',
+        imageUrl: 'https://cdn.myanimelist.net/images/anime/1079/138100.jpg',
         totalEpisodes: 37,
         currentEpisode: 37,
         status: 'Completed',
