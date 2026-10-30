@@ -10,6 +10,7 @@
   --button-neutral-hover: #c0c0c0;
   --button-neutral-active: #b0b0b0;
   --button-neutral-border: #333333;
+  --hover-mix: #000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +26,7 @@
     --button-neutral-hover: #333333;
     --button-neutral-active: #444444;
     --button-neutral-border: #b0b0b0;
+    --hover-mix: #fff;
   }
 }
 
@@ -62,6 +64,10 @@ a {
 
 .muted {
   color: var(--muted);
+}
+
+button {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {
