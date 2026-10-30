@@ -68,6 +68,28 @@ a {
 
 button {
   cursor: pointer;
+  
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--button-neutral-border);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+  
+  font-size: 1.5em;
+  text-align: center;
+  
+  transition-property: background-color color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: color-mix(transparent 20%, var(--hover-mix) 10%);
+    font-weight: bold;
+  }
+  
+  &:active {
+    background-color: color-mix(transparent 20%, var(--hover-mix) 20%);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
