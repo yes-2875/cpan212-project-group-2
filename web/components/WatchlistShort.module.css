@@ -1,0 +1,29 @@
+.watchlistShort {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1em;
+  gap: 0.5em;
+  
+  background-color: var(--container);
+  border: 1px solid var(--muted);
+  border-radius: 1em;
+  
+  transition: background-color 0.2s ease-in-out;
+  
+  &:hover {
+    background-color: var(--button-neutral-hover);
+  }
+  
+  &:active {
+    background-color: var(--button-neutral-active);
+  }
+  
+  > h1 {
+    font-size: 3em;
+  }
+  
+  > h2 {
+    font-size: 2em;
+  }
+}

@@ -2,6 +2,12 @@ h1.title {
   font-size: 6em;
 }
 
+.watchlists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
 .highlight {
   color: var(--accent);
   display: inline;

@@ -8,6 +8,7 @@
   
   --button-neutral-bg: #f0f0f0;
   --button-neutral-hover: #c0c0c0;
+  --button-neutral-active: #b0b0b0;
   --button-neutral-border: #333333;
 }
 
@@ -22,6 +23,7 @@
     
     --button-neutral-bg: #222222;
     --button-neutral-hover: #333333;
+    --button-neutral-active: #444444;
     --button-neutral-border: #b0b0b0;
   }
 }
@@ -56,6 +58,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.muted {
+  color: var(--muted);
 }
 
 @media (prefers-color-scheme: dark) {
