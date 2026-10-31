@@ -1,0 +1,55 @@
+.watchlistShort {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1em;
+  gap: 0.5em;
+  
+  background-color: var(--container);
+  border: 1px solid var(--muted);
+  border-radius: 1em;
+  
+  transition: background-color 0.2s ease-in-out;
+  
+  &:hover {
+    background-color: color-mix(in srgb, var(--container) 100%, var(--hover-mix) 5%);
+  }
+  
+  &:active {
+    background-color: color-mix(in srgb, var(--container) 100%, var(--hover-mix) 15%);
+  }
+  
+  h1 {
+    font-size: 3em;
+  }
+  
+  h2 {
+    font-size: 2em;
+  }
+}
+
+.delete {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+  
+  font-size: 1.5em;
+  text-align: center;
+  
+  transition-property: background-color color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: color-mix(var(--accent) 20%, var(--hover-mix) 1%);
+    font-weight: bold;
+  }
+  
+  &:active {
+    color: var(--foreground);
+    background-color: var(--accent);
+    font-weight: bold;
+  }
+}

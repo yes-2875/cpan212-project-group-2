@@ -2,7 +2,52 @@ h1.title {
   font-size: 6em;
 }
 
+.watchlists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
 .highlight {
   color: var(--accent);
   display: inline;
+}
+
+.createButton {
+  background-color: var(--button-neutral-bg);
+  border: 1px solid var(--button-neutral-border);
+  border-radius: 0.5em;
+  padding: 0.2em 0.5em;
+  margin-top: 1em;
+  display: inline-block;
+  
+  font-size: 2em;
+  text-align: center;
+  
+  transition-property: background-color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: var(--button-neutral-hover);
+    font-weight: bold;
+  }
+  
+  &:active {
+    background-color: var(--accent);
+    font-weight: bold;
+  }
+}
+
+.error {
+  margin: auto 0;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  
+  > h1 {
+    font-size: 4em;
+    color: var(--accent);
+  }
 }
