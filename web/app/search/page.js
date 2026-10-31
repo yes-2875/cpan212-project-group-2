@@ -39,10 +39,11 @@ export default function SearchPage() {
     return (
         <section>
             <h1>Search Anime</h1>
-
             <input
                 type="text"
                 placeholder="Enter anime name..."
+                name='query'
+                id='query'
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
             />
@@ -54,12 +55,10 @@ export default function SearchPage() {
             {searched && anime.length === 0 && (
                 <p>No results found.</p>
             )}
-
-            <div>
-                {anime.map((item) => (
-                    <SearchResult key={item.id} data={item} />
-                ))}
-            </div>
+            
+            {anime.map((item) => (
+                <SearchResult key={item.id} data={item} />
+            ))}
         </section>
     );
 }
