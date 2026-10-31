@@ -66,7 +66,7 @@ a {
   color: var(--muted);
 }
 
-button {
+button, .button {
   cursor: pointer;
   
   background-color: transparent;
@@ -79,8 +79,9 @@ button {
   font-size: 1.5em;
   text-align: center;
   
-  transition-property: background-color color font-weight;
-  transition: 0.1s ease-out;
+  transition-property: background-color, color, font-weight;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
   
   &:hover {
     background-color: color-mix(transparent 20%, var(--hover-mix) 10%);
@@ -90,6 +91,36 @@ button {
   &:active {
     background-color: color-mix(transparent 20%, var(--hover-mix) 20%);
   }
+  
+  &:disabled {
+    background-color: var(--button-neutral-bg);
+    color: var(--muted);
+  }
+}
+
+input[type='text'] {
+  
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--button-neutral-border);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+  
+  font-size: 1.5em;
+  
+  transition-property: background-color color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: color-mix(transparent 20%, var(--hover-mix) 10%);
+  }
+  
+  &:focus {
+    background-color: color-mix(transparent 20%, var(--hover-mix) 20%);
+  }
+  
+  margin-inline-end: 0.5em;
 }
 
 @media (prefers-color-scheme: dark) {
