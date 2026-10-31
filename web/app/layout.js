@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
             </nav>
           </header>
           <main className={styles.main}>
+            <NotificationStatus />
             {children}
           </main>
         </NotificationProvider>
