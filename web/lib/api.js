@@ -73,7 +73,7 @@ export const getWatchlistEntryById = async (id) => {
 export const searchAnime = async (q) => {
   try {
     const response = await fetch(
-      `${API_ORIGIN}/api/anime/search?q=${encodeURIComponent(q)}`,
+      `/api/anime/search?q=${encodeURIComponent(q)}`,
       {
         cache: 'no-store',
       }
