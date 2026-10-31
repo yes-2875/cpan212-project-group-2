@@ -3,10 +3,12 @@ import watchlistsRouter from './routes/watchlists.routes.js';
 import watchlistEntriesRouter from './routes/watchlistEntries.routes.js';
 import externalRouter from './routes/external.routes.js';
 import errorHandler from './middleware/errorHandler.js';
+import requestLogger from './middleware/requestLogger.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(requestLogger)
 app.use(express.json());
 
 // Watchlist routes
