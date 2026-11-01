@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { searchAnime } from "@/lib/api";
+import { searchAnime, getWatchlists } from "@/lib/api";
 import { useNotification } from "../context/NotificationContext";
 import SearchResult from "@/components/SearchResult";
 
@@ -10,10 +10,14 @@ export default function SearchPage() {
     const [anime, setAnime] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
+    const [watchlists, setWatchlists] = useState([]);
 
     const { showNotification } = useNotification();
 
     const handleSearch = async () => {
+        
+        const _watchlists = await getWatchlists();
+        
         if (!query.trim()) {
             showNotification("Please enter an anime name.");
             return;
@@ -24,12 +28,13 @@ export default function SearchPage() {
         setAnime([]);
 
         const results = await searchAnime(query.trim());
-
+        
         if (results === null) {
             showNotification("Something went wrong while searching.");
         } else {
             setAnime(results);
             setSearched(true);
+            setWatchlists(_watchlists);
             showNotification(`Found ${results.length} anime.`);
         }
 
@@ -57,7 +62,7 @@ export default function SearchPage() {
             )}
             
             {anime.map((item) => (
-                <SearchResult key={item.id} data={item} />
+                <SearchResult key={item.id} data={item} watchlists={watchlists} />
             ))}
         </section>
     );
