@@ -1,9 +1,9 @@
-const API_ORIGIN = process.env.API_ORIGIN ?? 'http://localhost:4000';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
 
 // This file serves as a utility to fetch requests from the REST API that will be running alongside the frontend.
 
 export const getWatchlists = async () => {
-  const response = await fetch(`${API_ORIGIN}/api/watchlists`, {
+  const response = await fetch(`${BASE_URL}/api/watchlists`, {
     cache: 'no-store',
   });
 
@@ -15,7 +15,7 @@ export const getWatchlists = async () => {
 };
 
 export const getWatchlistById = async (id) => {
-  const response = await fetch(`${API_ORIGIN}/api/watchlists/${id}`, {
+  const response = await fetch(`${BASE_URL}/api/watchlists/${id}`, {
     cache: 'no-store',
   });
   
@@ -29,7 +29,7 @@ export const getWatchlistById = async (id) => {
 };
 
 export const getWatchlistEntries = async () => {
-  const response = await fetch(`${API_ORIGIN}/api/watchlist-entries`, {
+  const response = await fetch(`${BASE_URL}/api/watchlist-entries`, {
     cache: 'no-store',
   });
   
@@ -41,7 +41,7 @@ export const getWatchlistEntries = async () => {
 };
 
 export const getWatchlistEntryById = async (id) => {
-  const response = await fetch(`${API_ORIGIN}/api/watchlist-entries/${id}`, {
+  const response = await fetch(`${BASE_URL}/api/watchlist-entries/${id}`, {
     cache: 'no-store',
   });
   
@@ -56,7 +56,7 @@ export const getWatchlistEntryById = async (id) => {
 
 export const searchAnime = async (q) => {
   const response = await fetch(
-    `/api/anime/search?q=${encodeURIComponent(q)}`,
+    `${BASE_URL}/api/anime/search?q=${encodeURIComponent(q)}`,
     {
       cache: 'no-store',
     }
