@@ -1,6 +1,7 @@
 "use client";
 
 import { useNotification } from "./NotificationContext";
+import styles from './NotificationStatus.module.css';
 
 export default function NotificationStatus() {
     const { notification, clearNotification } = useNotification();
@@ -10,7 +11,7 @@ export default function NotificationStatus() {
     }
 
     return (
-        <div>
+        <div className={styles.notification}>
             <p>{notification}</p>
 
             <button onClick={clearNotification}>
