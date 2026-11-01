@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1em;
-  
+
   background-color: var(--container);
   border: 1px solid var(--muted);
   border-radius: 1em;
@@ -23,9 +23,25 @@
   align-items: flex-start;
 }
 
-.synopsis { width: 50%; margin-bottom: 0.5em; }
+.synopsis {
+  width: 50%;
+  margin-bottom: 0.5em;
+}
 
 .buttons {
   display: inline-flex;
   gap: 1em;
+}
+
+.option {
+  background-color: var(--background);
+
+  &:checked {
+    background-color: var(--button-neutral-active);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--button-neutral-hover);
+  }
 }

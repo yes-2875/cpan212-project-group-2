@@ -1,0 +1,18 @@
+.notification {
+    background-color: var(--button-neutral-bg);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+
+    border: 1px solid var(--muted);
+    border-radius: 1em;
+
+
+    width: 48em;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1;
+}
