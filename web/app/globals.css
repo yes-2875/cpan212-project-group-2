@@ -11,6 +11,7 @@
   --button-neutral-active: #b0b0b0;
   --button-neutral-border: #333333;
   --hover-mix: #000;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {

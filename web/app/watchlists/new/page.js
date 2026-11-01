@@ -18,9 +18,6 @@ export default function NewWatchlistPage() {
     
     const form = new FormData(event.currentTarget);
     
-    // TODO: gather the required fields and create form data to submit
-    // as a POST request to the REST API. List any errors that show up
-    // for the respective fields on submit.
     const newWatchlist = {
       name: form.get('name'),
       description: form.get('description'),
