@@ -62,3 +62,4 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 **Smaller revision and editing of contributions:**
 - Commits [88c62fc](https://github.com/yes-2875/cpan212-project-group-2/commit/88c62fc06637b5277f411a838f67ef93626a88e7), [fabb218](https://github.com/yes-2875/cpan212-project-group-2/commit/fabb2183ba677081d52e6b62a231d26115e69bd9)
+- Implement HttpError, refactor error handling, add request logger (commits [1d21b79](https://github.com/yes-2875/cpan212-project-group-2/commit/1d21b7995549f25c69ff5d324814bddf90cac4b3), [2c1ccb6](https://github.com/yes-2875/cpan212-project-group-2/commit/2c1ccb6740ad37f69110d40f64527d2ad041d9ea), [97dae4d](https://github.com/yes-2875/cpan212-project-group-2/commit/97dae4d7d26d54112946c24f93514920b1a11bed), [8af51ad](https://github.com/yes-2875/cpan212-project-group-2/commit/8af51ad5629f3498f56c1b33787bc8ded61a5dd7))
