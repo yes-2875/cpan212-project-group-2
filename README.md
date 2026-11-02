@@ -5,6 +5,40 @@
 - Zlata (@ZlataSkotnyk)
 - Keziah (@cheetochiyo)
 
+## M3: Running the frontend and backend
+
+### 1. Installing dependencies
+- Install frontend dependencies
+cd web
+npm install
+
+- Install backend dependencies
+cd ../api
+npm install
+
+### 2. Environment variable configuration
+- Frontend (web/)
+Make a .env.local file with the following contents:
+API_ORIGIN=http://localhost:4000
+BASE_URL=http://localhost:3000
+
+- Backend (api/)
+Make a .env file with the following contents:
+PORT=4000
+
+### 3. Start backend
+- Runs at http://localhost:4000
+cd api
+npm run dev
+
+### 4. Start frontend
+- Runs at http://localhost:3000
+cd web
+npm run dev
+
+### 5. Open app
+- Visit http://localhost:3000
+
 ## AI use
 ### M2
 - ChatGPT: explained how to install Express 5 and why branch push rejected.
