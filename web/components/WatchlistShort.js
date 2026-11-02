@@ -14,7 +14,7 @@ export default async function WatchlistShort({data}) {
         <p className='muted'>{entries.length} items</p>
         <p style={{textAlign: 'center'}}>Click to view more</p>
       </Link>
-      <button className={styles.delete}>Delete</button>
+      <button className='delete'>Delete</button>
     </div>
   );
 }

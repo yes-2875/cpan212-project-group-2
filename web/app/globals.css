@@ -11,7 +11,6 @@
   --button-neutral-active: #b0b0b0;
   --button-neutral-border: #333333;
   --hover-mix: #000;
-  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,6 +64,32 @@ a {
 
 .muted {
   color: var(--muted);
+}
+
+button.delete {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+  
+  font-size: 1.5em;
+  text-align: center;
+  
+  transition-property: background-color color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: color-mix(var(--accent) 20%, var(--hover-mix) 1%);
+    font-weight: bold;
+  }
+  
+  &:active {
+    color: var(--foreground);
+    background-color: var(--accent) !important;
+    font-weight: bold;
+  }
 }
 
 button, .button, input[type='submit'] {
