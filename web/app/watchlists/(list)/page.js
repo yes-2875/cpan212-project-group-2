@@ -1,4 +1,4 @@
-import { getWatchlists } from "@/lib/api.js";
+import { getWatchlistEntries, getWatchlists } from "@/lib/api.js";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import WatchlistShort from "@/components/WatchlistShort";
@@ -6,6 +6,7 @@ import styles from "../page.module.css";
 
 export default async function Watchlists() {
   const watchlists = await getWatchlists();
+  const watchlistEntries = await getWatchlistEntries();
   
   if (!watchlists) {
     notFound();
@@ -16,7 +17,7 @@ export default async function Watchlists() {
       <h1 className={styles.title}> Your Watchlists</h1>
       {watchlists.length > 0 ?
         <div className={styles.watchlists}>
-          {watchlists.map( (item) => <WatchlistShort key={item._id} data={item} /> )}
+          {watchlists.map( (item) => <WatchlistShort key={item._id} data={item} entries={watchlistEntries.filter((entry) => entry.watchlistId === item._id)} /> )}
         </div>
       : <h3>You have no watchlists. Use the button below to create one.</h3>}
       
