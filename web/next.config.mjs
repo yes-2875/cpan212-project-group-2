@@ -14,9 +14,14 @@ const nextConfig = {
   },
   turbopack: {root: import.meta.dirname},
   
-  // TODO (Kez): implement API rewrite to route any /api/ requests from this frontend
-  // to the API_ORIGIN environment variable. Step 3 in Dor's Week 7 material shows how to do this.
-  
+  async rewrites() {
+    return [
+      {
+       source: '/api/:path*',
+       destination: `${process.env.API_ORIGIN ?? 'http://localhost:4000'}/api/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
