@@ -18,13 +18,10 @@ npm install
 
 ### 2. Environment variable configuration
 - Frontend (web/)
-Make a .env.local file with the following contents:
-API_ORIGIN=http://localhost:4000
-BASE_URL=http://localhost:3000
+**Copy the example environment variables** using `cp .env.example .env`
 
 - Backend (api/)
-Make a .env file with the following contents:
-PORT=4000
+**Copy the example environment variables** using `cp .env.example .env`
 
 ### 3. Start backend
 - Runs at http://localhost:4000
@@ -41,5 +38,17 @@ npm run dev
 
 ## AI use
 ### M2
-- ChatGPT: explained how to install Express 5 and why branch push rejected.
-- Gemini: explained how Map caching works for external API endpoint. Diagnosed 404 Not Found error when testing external API endpoint (was missing a forward slash in a router file).
+ChatGPT:
+- explained how to install Express 5 and why branch push rejected.
+
+Gemini:
+- explained how Map caching works for external API endpoint
+- Diagnosed 404 Not Found error when testing external API endpoint (was missing a forward slash in a router file).
+
+### M3
+Gemini:
+- explained the turbopack root warning in Next.js frontend (and showed how to grab the directory name as a variable in an ES module)
+- suggested some styling to fix the burden of automatic sizing of Next.js Image components (they require static width and height values)
+
+ChatGPT
+- explained merge conflicts
