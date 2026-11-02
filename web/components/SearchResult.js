@@ -39,7 +39,7 @@ export default function SearchResult({ data, watchlists }) {
 
       console.log(`Adding result to watchlist ID ${value}`);
 
-      const response = await fetch(`${BASE_URL}/api/watchlist-entries`, {
+      const response = await fetch('/api/watchlist-entries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(entry)
