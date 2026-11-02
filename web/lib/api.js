@@ -3,7 +3,7 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
 // This file serves as a utility to fetch requests from the REST API that will be running alongside the frontend.
 
 export const getWatchlists = async () => {
-  const response = await fetch(`${BASE_URL/api/watchlists`, {
+  const response = await fetch(`${BASE_URL}/api/watchlists`, {
     cache: 'no-store',
   });
 
@@ -41,7 +41,7 @@ export const getWatchlistEntries = async () => {
 };
 
 export const getWatchlistEntryById = async (id) => {
-  const response = await fetch(`${BASE_URL/api/watchlist-entries/${id}`, {
+  const response = await fetch(`${BASE_URL}/api/watchlist-entries/${id}`, {
     cache: 'no-store',
   });
 
