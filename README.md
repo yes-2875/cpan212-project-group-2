@@ -9,12 +9,12 @@
 
 ### 1. Installing dependencies
 - Install frontend dependencies
-cd web
-npm install
+`cd web`
+`npm install`
 
 - Install backend dependencies
-cd ../api
-npm install
+`cd ../api`
+`npm install`
 
 ### 2. Environment variable configuration
 - Frontend (web/)
@@ -25,13 +25,13 @@ npm install
 
 ### 3. Start backend
 - Runs at http://localhost:4000
-cd api
-npm run dev
+`cd api`
+`npm run dev`
 
 ### 4. Start frontend
 - Runs at http://localhost:3000
-cd web
-npm run dev
+`cd web`
+`npm run dev`
 
 ### 5. Open app
 - Visit http://localhost:3000
