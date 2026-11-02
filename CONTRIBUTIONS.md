@@ -72,11 +72,15 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 - 7: Shared state
 - 8: External API data in UI
 
+**Contributions were merged in pull requests #8, #9, #10**
+
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 4, 9:**
 - 1: Setup
 - 4: Rewrites
 - 9: `README.md` and `CONTRIBUTIONS.md` (M3 section)
+
+**Contributions were merged in pull request #11**
 
 ### Mirza Baig (@yes-2875)
 **Completed items 2, 5, 6:**
