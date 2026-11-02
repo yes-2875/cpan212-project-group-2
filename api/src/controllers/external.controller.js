@@ -49,7 +49,7 @@ export async function searchAnime(req, res, next) {
             imageUrl: anime.imageUrl || null,
             episodes: anime.episodes,
             score: anime.score,
-            year: anime.year,
+            year: new Date(anime.startDate).getFullYear(),
             synopsis: anime.synopsis,
         }));
         
