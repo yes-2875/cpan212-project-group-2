@@ -1,4 +1,4 @@
-import { getWatchlists } from "@/lib/api";
+import { getWatchlists } from "@/lib/api.js";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import WatchlistShort from "@/components/WatchlistShort";
