@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
             </Link>
             <nav className={styles.nav}>
               <Link href='/watchlists'>Your watchlists</Link>
-              <Link href='/watchlist-entries'>Watchlist entries</Link>
+              <Link href='/watchlists/new'>New watchlist</Link>
               <Link href='/search'>Search Anime</Link>
             </nav>
           </header>

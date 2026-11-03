@@ -19,3 +19,13 @@ h1.title {
     color: var(--accent);
   }
 }
+
+.intro {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: flex-start;
+  
+  max-width: 72em;
+}
