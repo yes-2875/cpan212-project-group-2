@@ -68,17 +68,17 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
 **Completed items 3, 7, 8:**
-- 3: Data from API (commits [cae4b28] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/cae4b2885234f93a248a63175a6c498c383e0bb2, [26ffde5] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/26ffde5014f2ffcef34012c3427806739b220667)
-- 7: Shared state (commits [950f2f7] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/950f2f781c23878bca0d0f7823ae97d98b2e4aff, [6079d04] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/6079d046665a67c95b5e9bc15620775227b2d52e)
-- 8: External API data in UI (commits [2b5317c] https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/2b5317cd760f68e575f005f958c424a824d9af42, [bb258f7] https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/bb258f76175e77d509c1335a85b369cd2c747685, [847c4bd] https://github.com/yes-2875/cpan212-project-group-2/pull/10/changes/847c4bd133dd9c8f47e9f82e6b197a0b65e9a088)
+- 3: Data from API (commits [cae4b28](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/cae4b2885234f93a248a63175a6c498c383e0bb2), [26ffde5](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/26ffde5014f2ffcef34012c3427806739b220667))
+- 7: Shared state (commits [950f2f7](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/950f2f781c23878bca0d0f7823ae97d98b2e4aff), [6079d04](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/6079d046665a67c95b5e9bc15620775227b2d52e))
+- 8: External API data in UI (commits [2b5317c](https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/2b5317cd760f68e575f005f958c424a824d9af42), [bb258f7](https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/bb258f76175e77d509c1335a85b369cd2c747685), [847c4bd](https://github.com/yes-2875/cpan212-project-group-2/pull/10/changes/847c4bd133dd9c8f47e9f82e6b197a0b65e9a088))
 
 **Contributions were merged in pull requests #8, #9, #10**
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 4, 9:**
-- 1: Setup (commits [37eda73] https://github.com/yes-2875/cpan212-project-group-2/pull/7/changes/37eda7359bd8b673e140b5d3d6adb9a2597c1e55)
-- 4: Rewrites (commits [372b18e] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/372b18e7cd7308829d447665c8b034cf460dfe0a, [6631055] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/6631055e36b8d3208116fb71146e821ec1a7af5c, [5733264] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/5733264b8749127164959f1137bc3779fdd15736)
-- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section) (commits [f5bbbb1] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/f5bbbb1c05e6826a6f2a0e3386c38a8f497e159b)
+- 1: Setup (commits [37eda73](https://github.com/yes-2875/cpan212-project-group-2/pull/7/changes/37eda7359bd8b673e140b5d3d6adb9a2597c1e55))
+- 4: Rewrites (commits [372b18e](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/372b18e7cd7308829d447665c8b034cf460dfe0a), [6631055](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/6631055e36b8d3208116fb71146e821ec1a7af5c), [5733264](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/5733264b8749127164959f1137bc3779fdd15736))
+- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section) (commits [f5bbbb1](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/f5bbbb1c05e6826a6f2a0e3386c38a8f497e159b))
 
 **Contributions were merged in pull requests #7, #11**
 
