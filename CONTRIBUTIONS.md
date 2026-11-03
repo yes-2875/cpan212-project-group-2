@@ -68,9 +68,9 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
 **Completed items 3, 7, 8:**
-- 3: Data from API
-- 7: Shared state
-- 8: External API data in UI
+- 3: Data from API (commits [cae4b28] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/cae4b2885234f93a248a63175a6c498c383e0bb2, [26ffde5] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/26ffde5014f2ffcef34012c3427806739b220667)
+- 7: Shared state (commits [950f2f7] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/950f2f781c23878bca0d0f7823ae97d98b2e4aff, [6079d04] https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/6079d046665a67c95b5e9bc15620775227b2d52e)
+- 8: External API data in UI (commits [2b5317c] https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/2b5317cd760f68e575f005f958c424a824d9af42, [bb258f7] https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/bb258f76175e77d509c1335a85b369cd2c747685, [847c4bd] https://github.com/yes-2875/cpan212-project-group-2/pull/10/changes/847c4bd133dd9c8f47e9f82e6b197a0b65e9a088)
 
 **Contributions were merged in pull requests #8, #9, #10**
 
