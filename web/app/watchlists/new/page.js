@@ -12,6 +12,9 @@ export default function NewWatchlistPage() {
   
   const handleSubmit = async(event) => {
     event.preventDefault();
+    
+    if (submitting) { return; }
+    
     setErrors({});
     setMessage({});
     setSubmitting(true);

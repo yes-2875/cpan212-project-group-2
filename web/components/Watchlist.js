@@ -20,6 +20,8 @@ export default async function Watchlist({watchlist}) {
         <h3>It's very empty in here. Mind finding some animes to add to your watchlist?</h3>
         <Link href='/search' className='button'>Search Anime</Link>
       </div>}
+      
+      <Link href={`/watchlists/${watchlist._id}/edit`} className='button'>Edit Watchlist</Link>
     </div>
   );
 }

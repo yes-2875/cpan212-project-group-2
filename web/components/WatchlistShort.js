@@ -44,7 +44,7 @@ export default function WatchlistShort({data, entries}) {
         <h2>{name}</h2>
         {description && <p>{description}</p>}
         <p className='muted'>{entries.length} items</p>
-        <p style={{textAlign: 'center'}}>Click to view more</p>
+        <p style={{textAlign: 'center'}}>Click to view more/edit</p>
       </Link>
       <button className='delete' onClick={() => handleDelete(1)} onDoubleClick={() => handleDelete(2)}>{deleteText}</button>
     </div>
