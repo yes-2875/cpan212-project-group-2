@@ -76,11 +76,11 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 4, 9:**
-- 1: Setup
-- 4: Rewrites
-- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section)
+- 1: Setup (commits [37eda73] https://github.com/yes-2875/cpan212-project-group-2/pull/7/changes/37eda7359bd8b673e140b5d3d6adb9a2597c1e55)
+- 4: Rewrites (commits [372b18e] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/372b18e7cd7308829d447665c8b034cf460dfe0a, [6631055] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/6631055e36b8d3208116fb71146e821ec1a7af5c, [5733264] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/5733264b8749127164959f1137bc3779fdd15736)
+- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section) (commits [f5bbbb1] https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/f5bbbb1c05e6826a6f2a0e3386c38a8f497e159b)
 
-**Contributions were merged in pull request #11**
+**Contributions were merged in pull requests #7, #11**
 
 ### Mirza Baig (@yes-2875)
 **Completed items 2, 5, 6:**
