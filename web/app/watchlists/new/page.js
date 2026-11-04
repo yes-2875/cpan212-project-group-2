@@ -57,7 +57,6 @@ export default function NewWatchlistPage() {
   
   return (
     <section className={styles.page}>
-      {/* TODO: implement the watchlist creation page. */}
       <h1>New Watchlist</h1>
       <p>Please enter the following details to create a new watchlist.</p>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
