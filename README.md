@@ -6,6 +6,10 @@
 - Keziah (@cheetochiyo)
 
 ## M3: Running the frontend and backend
+### Individual walkthroughs for M3:
+- Mirza: https://youtu.be/nOER3GF31no
+- Keziah: https://youtu.be/1o0O9uIlhuM
+- Zlata: https://www.youtube.com/watch?v=bbJ_knNiFGM
 
 ### 1. Installing dependencies
 - Install frontend dependencies
