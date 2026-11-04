@@ -68,22 +68,22 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
 **Completed items 3, 7, 8:**
-- 3: Data from API
-- 7: Shared state
-- 8: External API data in UI
+- 3: Data from API (commits [cae4b28](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/cae4b2885234f93a248a63175a6c498c383e0bb2), [26ffde5](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/26ffde5014f2ffcef34012c3427806739b220667))
+- 7: Shared state (commits [950f2f7](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/950f2f781c23878bca0d0f7823ae97d98b2e4aff), [6079d04](https://github.com/yes-2875/cpan212-project-group-2/pull/8/changes/6079d046665a67c95b5e9bc15620775227b2d52e))
+- 8: External API data in UI (commits [2b5317c](https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/2b5317cd760f68e575f005f958c424a824d9af42), [bb258f7](https://github.com/yes-2875/cpan212-project-group-2/pull/9/changes/bb258f76175e77d509c1335a85b369cd2c747685), [847c4bd](https://github.com/yes-2875/cpan212-project-group-2/pull/10/changes/847c4bd133dd9c8f47e9f82e6b197a0b65e9a088))
 
 **Contributions were merged in pull requests #8, #9, #10**
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 1, 4, 9:**
-- 1: Setup
-- 4: Rewrites
-- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section)
+- 1: Setup (commits [37eda73](https://github.com/yes-2875/cpan212-project-group-2/pull/7/changes/37eda7359bd8b673e140b5d3d6adb9a2597c1e55))
+- 4: Rewrites (commits [372b18e](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/372b18e7cd7308829d447665c8b034cf460dfe0a), [6631055](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/6631055e36b8d3208116fb71146e821ec1a7af5c), [5733264](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/5733264b8749127164959f1137bc3779fdd15736))
+- 9: `README.md` and `CONTRIBUTIONS.md` (M3 section) (commits [f5bbbb1](https://github.com/yes-2875/cpan212-project-group-2/pull/11/changes/f5bbbb1c05e6826a6f2a0e3386c38a8f497e159b), [917b233](https://github.com/yes-2875/cpan212-project-group-2/pull/12/changes/917b23398b9481fb0660dcd031f02495e2ce2be3))
 
-**Contributions were merged in pull request #11**
+**Contributions were merged in pull requests #7, #11**
 
 ### Mirza Baig (@yes-2875)
 **Completed items 2, 5, 6:**
-- 2: Pages
-- 5: Create and edit forms
-- 6: Loading, empty, and error states
+- 2: Pages (commits [f677fc0](https://github.com/yes-2875/cpan212-project-group-2/commit/f677fc0f7151642925f69d0158128cd8b6179d49), [4dd4a8f](https://github.com/yes-2875/cpan212-project-group-2/commit/4dd4a8f41caac7337bea9dffd2a919cdcb22c62d), [19879d5](https://github.com/yes-2875/cpan212-project-group-2/commit/19879d58332ccbac9f35a9213ee36d112b38b7c5), [102eef1](https://github.com/yes-2875/cpan212-project-group-2/commit/102eef1c148727d5957c7b0909c19a410a7f570a), [7354172](https://github.com/yes-2875/cpan212-project-group-2/commit/7354172fb06468a9fcaa3952e6647c5e321b6cfe))
+- 5: Create and edit forms (commits [5516cfd](https://github.com/yes-2875/cpan212-project-group-2/commit/5516cfd540b20a194ccb34f1bacc9e3a81d19d1d), [221a99a](https://github.com/yes-2875/cpan212-project-group-2/commit/221a9aa706ab0da04ae80160a1b97ad467feca24), [ee2bddf](https://github.com/yes-2875/cpan212-project-group-2/commit/ee2bddf29200a4c487ba94f2c38133c15b5c0f28), [52356bb](https://github.com/yes-2875/cpan212-project-group-2/commit/52356bba461aba7585254ab592b6481dfa442988))
+- 6: Loading, empty, and error states (commits [916a527](https://github.com/yes-2875/cpan212-project-group-2/commit/916a5274150d82fb6cc1dffdd057dcfb75f2f7ad), [2b5e347](https://github.com/yes-2875/cpan212-project-group-2/commit/2b5e3477fc1609bc79c2f3e65380954d9acd1ff5))
