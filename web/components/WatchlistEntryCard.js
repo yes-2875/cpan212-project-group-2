@@ -45,6 +45,7 @@ export default function WatchlistEntryCard({data}) {
       <p>{data.status}</p>
       
       <a href={`https://myanimelist.net/anime/${data.malId}`} className='button' target='_blank'>View on MAL</a>
+      <button className='blue-button' onClick={() => router.push(`/watchlist-entries/${data._id}/edit`)}>Edit</button>
       <button className='delete' onClick={() => handleDelete(1)} onDoubleClick={() => handleDelete(2)}>{deleteText}</button>
     </div>
   );

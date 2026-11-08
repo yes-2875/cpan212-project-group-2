@@ -32,16 +32,3 @@
   display: inline-flex;
   gap: 1em;
 }
-
-.option {
-  background-color: var(--background);
-
-  &:checked {
-    background-color: var(--button-neutral-active);
-  }
-
-  &:hover,
-  &:focus {
-    background-color: var(--button-neutral-hover);
-  }
-}

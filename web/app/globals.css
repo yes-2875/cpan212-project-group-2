@@ -5,6 +5,7 @@
   --foreground: #171717;
   --muted: #5f5f5f;
   --accent: #c56060;
+  --blue: #5037bc;
   
   --button-neutral-bg: #f0f0f0;
   --button-neutral-hover: #c0c0c0;
@@ -21,6 +22,7 @@
     --foreground: #ededed;
     --muted: #a0a0a0;
     --accent: #dd5f5f;
+    --blue: #7759ff;
     
     --button-neutral-bg: #222222;
     --button-neutral-hover: #333333;
@@ -66,7 +68,7 @@ a {
   color: var(--muted);
 }
 
-button.delete {
+button.delete, a.delete {
   background-color: transparent;
   color: var(--accent);
   border: 1px solid var(--accent);
@@ -88,6 +90,32 @@ button.delete {
   &:active {
     color: var(--foreground);
     background-color: var(--accent) !important;
+    font-weight: bold;
+  }
+}
+
+button.blue-button {
+  background-color: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+  
+  font-size: 1.5em;
+  text-align: center;
+  
+  transition-property: background-color color font-weight;
+  transition: 0.1s ease-out;
+  
+  &:hover {
+    background-color: color-mix(var(--blue) 20%, var(--hover-mix) 1%);
+    font-weight: bold;
+  }
+  
+  &:active {
+    color: var(--foreground);
+    background-color: var(--blue) !important;
     font-weight: bold;
   }
 }
@@ -126,7 +154,7 @@ button, .button, input[type='submit'] {
   }
 }
 
-input[type='text'], textarea {
+input[type='text'], textarea, input[type='number'], select {
   
   background-color: transparent;
   color: var(--foreground);
@@ -151,6 +179,25 @@ input[type='text'], textarea {
   }
   
   margin-inline-end: 0.5em;
+}
+
+input[type='number'] {
+  font-size: 1em;
+  padding: 0;
+}
+
+option {
+  background-color: var(--background);
+  text-align: center;
+
+  &:checked {
+    background-color: var(--button-neutral-active);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--button-neutral-hover);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
