@@ -11,6 +11,7 @@ export default function WatchlistEntry({data, status}) {
   if (!data) {
     notFound();
   }
+  
   const statuses = [
     'Watching',
     'Completed',
@@ -38,17 +39,22 @@ export default function WatchlistEntry({data, status}) {
     
     const newWatchlistEntry = {
       watchlistId: data.watchlistId,
-      malId: data.malId,
+      malId: Number(data.malId),
       title: data.title,
       imageUrl: data.imageUrl,
-      totalEpisodes: data.totalEpisodes,
+      totalEpisodes: Number(data.totalEpisodes),
       currentEpisode: Number(form.get('current-episode')),
       status: form.get('status'),
-      score: data.score
+      score: Number(data.score)
     };
     
     try {
-      const url = `/api/watchlist-entries/${status === 'editing' && data._id}`
+      
+      let url = '/api/watchlist-entries/'
+      if (status === 'editing') {
+        url += data._id;
+      }
+      
       const response = await fetch(url, {
         method: (status === 'editing' ? 'PUT' : 'POST'),
         headers: {'Content-Type': 'application/json'},
@@ -67,11 +73,11 @@ export default function WatchlistEntry({data, status}) {
       }
       
       setSubmitting(false);
-      showNotification('Watchlist entry successfully edited.');
+      showNotification(status === 'editing' ? 'Watchlist entry successfully edited.' : 'Successfully added item to watchlist.');
       router.push('/watchlists/' + body.watchlistId);
       
     } catch(err) {
-      setMessage('Could not reach the REST API. Check that it is running.');
+      setMessage('Could not reach the REST API. Check that it is running. ' + err);
       setSubmitting(false);
     }
     
@@ -101,7 +107,7 @@ export default function WatchlistEntry({data, status}) {
           
           <div className={styles.field}>
             <label htmlFor='status'>Status: </label>
-            <select className={styles.option} name='status' id='status'>
+            <select className={styles.option} name='status' id='status' defaultValue={data.status}>
               {statuses.map((item) => (<option key={item} value={item}>{item}</option>))}
             </select>
             {errors.name && <p className={styles.error}>{errors.name}</p>}

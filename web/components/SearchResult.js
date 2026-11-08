@@ -25,46 +25,23 @@ export default function SearchResult({ data, watchlists }) {
     } else {
 
       setAdding(true);
-
+      
       const entry = {
         watchlistId: value,
         malId: data.id,
         title: data.title,
         imageUrl: data.imageUrl,
         totalEpisodes: data.episodes,
-        currentEpisode: 1,
-        status: 'Plan to Watch',
+        /*currentEpisode: 1,
+        status: 'Plan to Watch',*/
         score: data.score
       };
-
-      console.log(`Adding result to watchlist ID ${value}`);
-
-      const response = await fetch('/api/watchlist-entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(entry)
-      });
-
-      const body = await response.json();
-
-      if (!response.ok) {
-        let message = 'Failed to add to watchlist: ' + body.error.message + ':';
-        if (body.error.details) {
-          for (const prop in body.error.details) {
-            message += ` ${prop}: ${body.error.details[prop]},`;
-          }
-        }
-
-        message = message.slice(0, message.length - 1);
-
-        showNotification(message);
-        setAdding(false);
-        return;
-      }
-
-      showNotification('Successfully added item to watchlist.');
+      
+      const encoded = JSON.stringify(entry);
+      
+      router.push(`/watchlist-entries/new?data=${encodeURIComponent(encoded)}`);
       setAdding(false);
-      router.push(`/watchlists/${value}`);
+      
     }
   };
 

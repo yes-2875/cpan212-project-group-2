@@ -1,10 +1,14 @@
 import WatchlistEntry from "@/components/WatchlistEntry";
+import Loading from "../(list)/loading";
+import { Suspense } from "react";
 
-export default function EditWatchlistEntryPage({ data }) {
+export default async function NewWatchlistEntryPage({ searchParams }) {
   
   return (
-    <section>
-      <WatchlistEntry data={data} status='new' />
-    </section>
+    <Suspense fallback={<Loading />}>
+      {searchParams.then(({data}) => (
+        <WatchlistEntry data={JSON.parse(decodeURIComponent(data))} status='new' />
+      ))}
+    </Suspense>
   );
 }
