@@ -6,6 +6,9 @@
 - Keziah (@cheetochiyo)
 
 ## M3: Running the frontend and backend
+### Video demonstration for M2 and M3:
+https://youtu.be/EwYVtFUykzo
+
 ### Individual walkthroughs for M3:
 - Mirza: https://youtu.be/nOER3GF31no
 - Keziah: https://youtu.be/1o0O9uIlhuM
@@ -53,6 +56,7 @@ Gemini:
 Gemini:
 - explained the turbopack root warning in Next.js frontend (and showed how to grab the directory name as a variable in an ES module)
 - suggested some styling to fix the burden of automatic sizing of Next.js Image components (they require static width and height values)
+- explained how to pass JSON data from one page to another (passing props to pages isn't possible, had to work around this and use search queries)
 
 ChatGPT
 - explained merge conflicts
