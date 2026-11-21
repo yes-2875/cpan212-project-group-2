@@ -114,18 +114,17 @@ export async function updateEntry(req, res) {
     } = req.body;
 
     if (watchlistId !== undefined) {
+        // A bad watchlistId in the body is invalid input (400), not a missing entry (404).
         if (!mongoose.isValidObjectId(watchlistId)) {
-            throw new HttpError(404, 'A valid watchlistId is required', {
-                watchlistId
+            throw new HttpError(400, 'Validation failed', {
+                watchlistId: 'A valid watchlistId is required'
             });
         }
 
         const watchlist = await Watchlist.findById(watchlistId);
 
         if (!watchlist) {
-            throw new HttpError(404, 'A valid watchlistId is required', {
-                watchlistId
-            });
+            throw new HttpError(404, 'Watchlist not found', { watchlistId });
         }
 
         entry.watchlistId = watchlistId;
@@ -139,8 +138,10 @@ export async function updateEntry(req, res) {
     if (status !== undefined) entry.status = status;
     if (score !== undefined) entry.score = score;
 
+    // sanitizeFilter treats any { $...: } object as a plain value, so $ne must be marked trusted.
+    // Safe here: our code builds the object, and id was already checked to be a valid ObjectId.
     const entryExists = await WatchlistEntry.findOne({
-        _id: { $ne: id },
+        _id: mongoose.trusted({ $ne: id }),
         watchlistId: entry.watchlistId,
         malId: entry.malId
     });
