@@ -55,11 +55,15 @@ const watchlistEntrySchema = new mongoose.Schema({
         min: 0,
         max: 10
     }
+}, {
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+            return ret;
+        },
+    }
 });
 
-const WatchlistEntry = mongoose.model(
-    'WatchlistEntry',
-    watchlistEntrySchema
-);
+const WatchlistEntry = mongoose.model('WatchlistEntry', watchlistEntrySchema);
 
 export default WatchlistEntry;

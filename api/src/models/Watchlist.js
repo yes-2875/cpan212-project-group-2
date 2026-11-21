@@ -18,6 +18,13 @@ const watchlistSchema = new mongoose.Schema({
         maxlength: 500,
         default: ''
     }
+}, {
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+            return ret;
+        },
+    }
 });
 
 const Watchlist = mongoose.model('Watchlist', watchlistSchema);
