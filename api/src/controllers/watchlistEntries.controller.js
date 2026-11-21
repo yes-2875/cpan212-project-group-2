@@ -1,24 +1,31 @@
+import mongoose from 'mongoose';
 import { HttpError } from '../lib/httpError.js';
-import { randomUUID } from 'node:crypto';
-import { watchlists, watchlistEntries } from '../data/store.js';
-
-//let count = watchlistEntries.length + 1
+import Watchlist from '../models/Watchlist.js';
+import WatchlistEntry from '../models/WatchlistEntry.js';
 
 // GET /api/watchlist-entries
 // Get all anime entries
-export function getAllEntries(req, res) {
-    res.status(200).json(watchlistEntries);
+export async function getAllEntries(req, res) {
+    const entries = await WatchlistEntry.find()
+        .populate('watchlistId');
+
+    res.status(200).json(entries);
 }
 
 // GET /api/watchlist-entries/:id
 // Get one anime entry by ID
-export function getEntryById(req, res, next) {
-    const entry = watchlistEntries.find(
-        (item) => item._id === req.params.id
-    );
+export async function getEntryById(req, res) {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
+    }
+
+    const entry = await WatchlistEntry.findById(id)
+        .populate('watchlistId');
 
     if (!entry) {
-        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
+        throw new HttpError(404, 'Watchlist entry not found', { id });
     }
 
     res.status(200).json(entry);
@@ -26,7 +33,7 @@ export function getEntryById(req, res, next) {
 
 // POST /api/watchlist-entries
 // Add an anime to a watchlist
-export function createEntry(req, res, next) {
+export async function createEntry(req, res) {
     const {
         watchlistId,
         malId,
@@ -38,25 +45,33 @@ export function createEntry(req, res, next) {
         score = 0
     } = req.body;
 
-    const watchlistExists = watchlists.some(
-        (item) => item._id === watchlistId
-    );
-    
-    const entryExists = watchlistEntries.some(
-        (item) => item.malId === malId && item.watchlistId === watchlistId
-    );
-
-    if (!watchlistExists) {
-        throw new HttpError(400, 'A valid watchlistId is required', {watchlistId});
+    if (!mongoose.isValidObjectId(watchlistId)) {
+        throw new HttpError(400, 'A valid watchlistId is required', {
+            watchlistId
+        });
     }
-    
-    // Check for duplicate watchlist entries in the same watchlist
+
+    const watchlist = await Watchlist.findById(watchlistId);
+
+    if (!watchlist) {
+        throw new HttpError(400, 'A valid watchlistId is required', {
+            watchlistId
+        });
+    }
+
+    const entryExists = await WatchlistEntry.findOne({
+        watchlistId,
+        malId
+    });
+
     if (entryExists) {
-        throw new HttpError(409, 'This entry already exists in watchlist', {watchlistId, malId});
+        throw new HttpError(409, 'This entry already exists in watchlist', {
+            watchlistId,
+            malId
+        });
     }
 
-    const newEntry = {
-        _id: crypto.randomUUID(),
+    const newEntry = await WatchlistEntry.create({
         watchlistId,
         malId,
         title,
@@ -65,23 +80,26 @@ export function createEntry(req, res, next) {
         currentEpisode,
         status,
         score
-    };
+    });
 
-    watchlistEntries.push(newEntry);
-    
-    //count++;
+    await newEntry.populate('watchlistId');
+
     res.status(201).json(newEntry);
 }
 
 // PUT /api/watchlist-entries/:id
 // Update an anime entry
-export function updateEntry(req, res, next) {
-    const index = watchlistEntries.findIndex(
-        (item) => item._id === req.params.id
-    );
+export async function updateEntry(req, res) {
+    const { id } = req.params;
 
-    if (index === -1) {
-        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
+    if (!mongoose.isValidObjectId(id)) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
+    }
+
+    const entry = await WatchlistEntry.findById(id);
+
+    if (!entry) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
     }
 
     const {
@@ -96,42 +114,65 @@ export function updateEntry(req, res, next) {
     } = req.body;
 
     if (watchlistId !== undefined) {
-        const watchlistExists = watchlists.some(
-            (item) => item._id === watchlistId
-        );
-
-        if (!watchlistExists) {
-            throw new HttpError(404, 'A valid watchlistId is required', {watchlistId});
+        // A bad watchlistId in the body is invalid input (400), not a missing entry (404).
+        if (!mongoose.isValidObjectId(watchlistId)) {
+            throw new HttpError(400, 'Validation failed', {
+                watchlistId: 'A valid watchlistId is required'
+            });
         }
+
+        const watchlist = await Watchlist.findById(watchlistId);
+
+        if (!watchlist) {
+            throw new HttpError(404, 'Watchlist not found', { watchlistId });
+        }
+
+        entry.watchlistId = watchlistId;
     }
 
-    watchlistEntries[index] = {
-        ...watchlistEntries[index],
-        ...(watchlistId !== undefined && { watchlistId }),
-        ...(malId !== undefined && { malId }),
-        ...(title !== undefined && { title }),
-        ...(imageUrl !== undefined && { imageUrl }),
-        ...(totalEpisodes !== undefined && { totalEpisodes }),
-        ...(currentEpisode !== undefined && { currentEpisode }),
-        ...(status !== undefined && { status }),
-        ...(score !== undefined && { score })
-    };
+    if (malId !== undefined) entry.malId = malId;
+    if (title !== undefined) entry.title = title;
+    if (imageUrl !== undefined) entry.imageUrl = imageUrl;
+    if (totalEpisodes !== undefined) entry.totalEpisodes = totalEpisodes;
+    if (currentEpisode !== undefined) entry.currentEpisode = currentEpisode;
+    if (status !== undefined) entry.status = status;
+    if (score !== undefined) entry.score = score;
 
-    res.status(200).json(watchlistEntries[index]);
+    // sanitizeFilter treats any { $...: } object as a plain value, so $ne must be marked trusted.
+    // Safe here: our code builds the object, and id was already checked to be a valid ObjectId.
+    const entryExists = await WatchlistEntry.findOne({
+        _id: mongoose.trusted({ $ne: id }),
+        watchlistId: entry.watchlistId,
+        malId: entry.malId
+    });
+
+    if (entryExists) {
+        throw new HttpError(409, 'This entry already exists in watchlist', {
+            watchlistId: entry.watchlistId,
+            malId: entry.malId
+        });
+    }
+
+    await entry.save();
+    await entry.populate('watchlistId');
+
+    res.status(200).json(entry);
 }
 
 // DELETE /api/watchlist-entries/:id
 // Remove an anime entry
-export function deleteEntry(req, res, next) {
-    const index = watchlistEntries.findIndex(
-        (item) => item._id === req.params.id
-    );
+export async function deleteEntry(req, res) {
+    const { id } = req.params;
 
-    if (index === -1) {
-        throw new HttpError(404, 'Watchlist entry not found', {id: req.params.id});
+    if (!mongoose.isValidObjectId(id)) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
     }
 
-    watchlistEntries.splice(index, 1);
+    const entry = await WatchlistEntry.findByIdAndDelete(id);
+
+    if (!entry) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
+    }
 
     res.status(204).end();
 }

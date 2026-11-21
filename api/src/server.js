@@ -4,6 +4,7 @@ import watchlistEntriesRouter from './routes/watchlistEntries.routes.js';
 import externalRouter from './routes/external.routes.js';
 import errorHandler from './middleware/errorHandler.js';
 import requestLogger from './middleware/requestLogger.js';
+import connectDB from './db/connect.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -24,12 +25,19 @@ app.use('/api/anime', externalRouter);
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.originalUrl}: Endpoint not found`);
   error.status = 404;
-  
+
   next(error);
 });
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Connect to MongoDB before starting the server
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+};
+
+startServer();
