@@ -1,4 +1,4 @@
-const animeStatuses = [
+export const ANIME_STATUSES = [
     'Watching',
     'Completed',
     'Plan to Watch',
@@ -109,7 +109,7 @@ export function validateEntryCreate(data) {
 
     if (
         data.status !== undefined &&
-        !animeStatuses.includes(data.status)
+        !ANIME_STATUSES.includes(data.status)
     ) {
         errors.status = 'Invalid anime status';
     }
@@ -201,7 +201,7 @@ export function validateEntryUpdate(data) {
 
     if (
         data.status !== undefined &&
-        !animeStatuses.includes(data.status)
+        !ANIME_STATUSES.includes(data.status)
     ) {
         errors.status = 'Invalid anime status';
     }
