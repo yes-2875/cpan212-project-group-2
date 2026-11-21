@@ -30,12 +30,24 @@ const watchlistEntrySchema = new mongoose.Schema({
     currentEpisode: {
         type: Number,
         default: 0,
-        min: 0
+        min: 0,
+        validate: {
+            validator: function (value) {
+                return this.totalEpisodes === 0 || value <= this.totalEpisodes;
+            },
+            message: 'Current episode cannot exceed total episodes'
+        }
     },
     status: {
         type: String,
         required: true,
-        enum: ['Plan to Watch', 'Watching', 'Completed']
+        enum: [
+            'Watching',
+            'Completed',
+            'Plan to Watch',
+            'On Hold',
+            'Dropped'
+        ]
     },
     score: {
         type: Number,
