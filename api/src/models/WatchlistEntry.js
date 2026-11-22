@@ -33,7 +33,13 @@ const watchlistEntrySchema = new mongoose.Schema({
         min: 0,
         validate: {
             validator: function (value) {
-                return this.totalEpisodes === 0 || value <= this.totalEpisodes;
+                const totalEpisodes = this instanceof mongoose.Document
+                    ? this.totalEpisodes
+                    : this.get('totalEpisodes');
+
+                return totalEpisodes === undefined ||
+                    totalEpisodes === 0 ||
+                    value <= totalEpisodes;
             },
             message: 'Current episode cannot exceed total episodes'
         }
