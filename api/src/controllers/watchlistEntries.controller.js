@@ -3,13 +3,31 @@ import { HttpError } from '../lib/httpError.js';
 import Watchlist from '../models/Watchlist.js';
 import WatchlistEntry from '../models/WatchlistEntry.js';
 
-// GET /api/watchlist-entries
-// Get all anime entries
+// GET /api/watchlist-entries?status=&watchlistId=&q=&sort=&page=&limit=
+// Get one page of anime entries, filtered and sorted.
+// The query string was already checked by parseEntryListQuery (middleware/entryListQuery.js).
 export async function getAllEntries(req, res) {
-    const entries = await WatchlistEntry.find()
-        .populate('watchlistId');
+    const { filter, sort, page, limit } = res.locals.listQuery;
 
-    res.status(200).json(entries);
+    // Two queries at once: one page of entries, and how many entries match in total.
+    // Sort comes before skip/limit so pages are stable. countDocuments uses the same filter.
+    const [entries, total] = await Promise.all([
+        WatchlistEntry.find(filter)
+            .sort(sort)
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .populate('watchlistId'),
+        WatchlistEntry.countDocuments(filter)
+    ]);
+
+    // A page past the end isn't an error: data is just empty.
+    res.status(200).json({
+        data: entries,
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit)
+    });
 }
 
 // GET /api/watchlist-entries/:id
