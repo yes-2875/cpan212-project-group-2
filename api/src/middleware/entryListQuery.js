@@ -1,104 +1,73 @@
 import mongoose from 'mongoose';
 import { HttpError } from '../lib/httpError.js';
 import { ANIME_STATUSES } from '../schemas/validation.schemas.js';
+import {
+  MAX_SEARCH_LENGTH,
+  escapeRegex,
+  rejectRepeated,
+  readQuery,
+  parseSort,
+  parsePaging
+} from '../lib/listQuery.js';
 
-export const DEFAULT_LIMIT = 10;
-export const MAX_LIMIT = 50;
-export const MAX_SEARCH_LENGTH = 100;
 export const DEFAULT_SORT = 'title';
 
 // Only these fields can be sorted on. Passing req.query.sort straight to .sort()
 // would let a client sort on any field, including ones we never meant to expose.
-export const SORT_FIELDS = ['title', 'score', 'currentEpisode', 'totalEpisodes'];
-
-// Escape every regex special character, so a search for "c++" or ".*" matches literally
-// instead of crashing the query or matching everything (and can't be used for ReDoS).
-function escapeRegex(text) {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-// "3" is a whole number. "3.5", "-1", "abc", "" and "1e3" are not.
-function parseWholeNumber(text, { min, max }) {
-    const number = /^\d+$/.test(text) ? Number(text) : Number.NaN;
-    return number >= min && number <= max ? number : null;
-}
+export const SORT_FIELDS = {
+  title: 'title',
+  score: 'score',
+  currentEpisode: 'currentEpisode',
+  totalEpisodes: 'totalEpisodes'
+};
 
 // Reads GET /api/watchlist-entries?status=&watchlistId=&q=&sort=&page=&limit=
 // and stores { filter, sort, page, limit } in res.locals.listQuery for the controller.
 // Every problem goes into one 400 response.
 export function parseEntryListQuery(req, res, next) {
-    const names = ['status', 'watchlistId', 'q', 'sort', 'page', 'limit'];
+  rejectRepeated(req.query, ['status', 'watchlistId', 'q', 'sort', 'page', 'limit']);
 
-    // Express turns ?page=1&page=2 into an array. None of these make sense twice.
-    const repeated = names.filter(
-        (name) => req.query[name] !== undefined && typeof req.query[name] !== 'string'
-    );
-    if (repeated.length > 0) {
-        const details = Object.fromEntries(repeated.map((name) => [name, `Send ${name} only once`]));
-        throw new HttpError(400, 'Invalid query', details);
+  const status = readQuery(req.query, 'status');
+  const watchlistId = readQuery(req.query, 'watchlistId');
+  const q = readQuery(req.query, 'q');
+  const sort = readQuery(req.query, 'sort') ?? DEFAULT_SORT;
+
+  const errors = {};
+  const filter = {};
+
+  if (status !== undefined) {
+    if (ANIME_STATUSES.includes(status)) {
+      filter.status = status;
+    } else {
+      errors.status = `Must be one of: ${ANIME_STATUSES.join(', ')}`;
     }
+  }
 
-    // A GET form sends every field, filled in or not (?q=&status=), so an empty value means "not set".
-    const value = (name) => (req.query[name] === '' ? undefined : req.query[name]);
-    const status = value('status');
-    const watchlistId = value('watchlistId');
-    const q = value('q');
-    const sort = value('sort') ?? DEFAULT_SORT;
-    const page = value('page') ?? '1';
-    const limit = value('limit') ?? String(DEFAULT_LIMIT);
-
-    const errors = {};
-    const filter = {};
-
-    if (status !== undefined) {
-        if (ANIME_STATUSES.includes(status)) {
-            filter.status = status;
-        } else {
-            errors.status = `Must be one of: ${ANIME_STATUSES.join(', ')}`;
-        }
+  if (watchlistId !== undefined) {
+    if (mongoose.isObjectIdOrHexString(watchlistId)) {
+      filter.watchlistId = watchlistId;
+    } else {
+      errors.watchlistId = 'Must be a valid watchlist id';
     }
+  }
 
-    if (watchlistId !== undefined) {
-        if (mongoose.isObjectIdOrHexString(watchlistId)) {
-            filter.watchlistId = watchlistId;
-        } else {
-            errors.watchlistId = 'Must be a valid watchlist id';
-        }
+  if (q !== undefined) {
+    if (q.length > MAX_SEARCH_LENGTH) {
+      errors.q = `Must be ${MAX_SEARCH_LENGTH} characters or fewer`;
+    } else {
+      // Case-insensitive "title contains q". A RegExp object passes sanitizeFilter; { $regex } would not.
+      filter.title = new RegExp(escapeRegex(q), 'i');
     }
+  }
 
-    if (q !== undefined) {
-        if (q.length > MAX_SEARCH_LENGTH) {
-            errors.q = `Must be ${MAX_SEARCH_LENGTH} characters or fewer`;
-        } else {
-            // Case-insensitive "title contains q". A RegExp object passes sanitizeFilter; { $regex } would not.
-            filter.title = new RegExp(escapeRegex(q), 'i');
-        }
-    }
+  // "-score" means score, highest first.
+  const sortBy = parseSort(sort, SORT_FIELDS, errors);
+  const { page, limit } = parsePaging(readQuery(req.query, 'page'), readQuery(req.query, 'limit'), errors);
 
-    // "-score" means score, highest first.
-    const descending = sort.startsWith('-');
-    const sortField = descending ? sort.slice(1) : sort;
-    if (!SORT_FIELDS.includes(sortField)) {
-        errors.sort = `Must be one of: ${SORT_FIELDS.join(', ')}. Put - in front to reverse the order, for example -score`;
-    }
-    // _id breaks ties, so entries with the same score keep the same order on every page.
-    const direction = descending ? -1 : 1;
-    const sortBy = { [sortField]: direction, _id: direction };
+  if (Object.keys(errors).length > 0) {
+    throw new HttpError(400, 'Invalid query', errors);
+  }
 
-    const pageNumber = parseWholeNumber(page, { min: 1, max: Number.MAX_SAFE_INTEGER });
-    if (pageNumber === null) {
-        errors.page = 'Must be a whole number, 1 or more';
-    }
-
-    const limitNumber = parseWholeNumber(limit, { min: 1, max: MAX_LIMIT });
-    if (limitNumber === null) {
-        errors.limit = `Must be a whole number from 1 to ${MAX_LIMIT}`;
-    }
-
-    if (Object.keys(errors).length > 0) {
-        throw new HttpError(400, 'Invalid query', errors);
-    }
-
-    res.locals.listQuery = { filter, sort: sortBy, page: pageNumber, limit: limitNumber };
-    next();
+  res.locals.listQuery = { filter, sort: sortBy, page, limit };
+  next();
 }
