@@ -74,5 +74,31 @@ export function parseEntryListQuery(req, res, next) {
             filter.title = new RegExp(escapeRegex(q), 'i');
         }
     }
+
+    // "-score" means score, highest first.
+    const descending = sort.startsWith('-');
+    const sortField = descending ? sort.slice(1) : sort;
+    if (!SORT_FIELDS.includes(sortField)) {
+        errors.sort = `Must be one of: ${SORT_FIELDS.join(', ')}. Put - in front to reverse the order, for example -score`;
+    }
+    // _id breaks ties, so entries with the same score keep the same order on every page.
+    const direction = descending ? -1 : 1;
+    const sortBy = { [sortField]: direction, _id: direction };
+
+    const pageNumber = parseWholeNumber(page, { min: 1, max: Number.MAX_SAFE_INTEGER });
+    if (pageNumber === null) {
+        errors.page = 'Must be a whole number, 1 or more';
+    }
+
+    const limitNumber = parseWholeNumber(limit, { min: 1, max: MAX_LIMIT });
+    if (limitNumber === null) {
+        errors.limit = `Must be a whole number from 1 to ${MAX_LIMIT}`;
+    }
+
+    if (Object.keys(errors).length > 0) {
+        throw new HttpError(400, 'Invalid query', errors);
+    }
+
+    res.locals.listQuery = { filter, sort: sortBy, page: pageNumber, limit: limitNumber };
     next();
 }
