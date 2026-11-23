@@ -14,7 +14,7 @@ async function findWatchlistOr404(id) {
   const watchlist = await Watchlist.findById(id);
 
   if (!watchlist) {
-    throw new HttpError(404, 'Watchlist not found', { id });
+    throw new HttpError(400, 'Watchlist not found', { id });
   }
 
   return watchlist;

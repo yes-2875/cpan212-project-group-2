@@ -110,7 +110,7 @@ export default function WatchlistEntry({data, status}) {
             <select className={styles.option} name='status' id='status' defaultValue={data.status}>
               {statuses.map((item) => (<option key={item} value={item}>{item}</option>))}
             </select>
-            {errors.name && <p className={styles.error}>{errors.name}</p>}
+            {errors.status && <p className={styles.error}>{errors.status}</p>}
           </div>
           
           <button type='submit' className='blue-button' disabled={submitting}>Save Entry</button>
