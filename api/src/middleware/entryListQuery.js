@@ -49,5 +49,30 @@ export function parseEntryListQuery(req, res, next) {
 
     const errors = {};
     const filter = {};
+
+    if (status !== undefined) {
+        if (ANIME_STATUSES.includes(status)) {
+            filter.status = status;
+        } else {
+            errors.status = `Must be one of: ${ANIME_STATUSES.join(', ')}`;
+        }
+    }
+
+    if (watchlistId !== undefined) {
+        if (mongoose.isObjectIdOrHexString(watchlistId)) {
+            filter.watchlistId = watchlistId;
+        } else {
+            errors.watchlistId = 'Must be a valid watchlist id';
+        }
+    }
+
+    if (q !== undefined) {
+        if (q.length > MAX_SEARCH_LENGTH) {
+            errors.q = `Must be ${MAX_SEARCH_LENGTH} characters or fewer`;
+        } else {
+            // Case-insensitive "title contains q". A RegExp object passes sanitizeFilter; { $regex } would not.
+            filter.title = new RegExp(escapeRegex(q), 'i');
+        }
+    }
     next();
 }
