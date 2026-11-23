@@ -1,9 +1,23 @@
+import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
+
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
 
 // This file serves as a utility to fetch requests from the REST API that will be running alongside the frontend.
 
-export const getWatchlists = async () => {
-  const response = await fetch(`${BASE_URL}/api/watchlists`, {
+function makeQueryString(params = {}) {
+  const query = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== null && value !== '') {
+      query.set(key, String(value));
+    }
+  }
+  const result = query.toString();
+  return result ? `?${result}` : '';
+}
+
+export const getWatchlists = async (params = {}) => {
+  const response = await fetch(`${BASE_URL}/api/watchlists${makeQueryString(params)}`, {
     cache: 'no-store',
   });
 
@@ -28,9 +42,8 @@ export const getWatchlistById = async (id) => {
   return await response.json();
 };
 
-export const getWatchlistEntries = async () => {
-  const response = await fetch(`${BASE_URL}/api/watchlist-entries`, {
-    cache: 'no-store',
+export const getWatchlistEntries = async (params = {}) => {
+  const response = await fetch(`${BASE_URL}/api/watchlist-entries${makeQueryString(params)}`, {
   });
 
   if (!response.ok) {
