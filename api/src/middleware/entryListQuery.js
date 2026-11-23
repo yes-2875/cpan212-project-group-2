@@ -27,6 +27,27 @@ function parseWholeNumber(text, { min, max }) {
 // and stores { filter, sort, page, limit } in res.locals.listQuery for the controller.
 // Every problem goes into one 400 response.
 export function parseEntryListQuery(req, res, next) {
-    
+    const names = ['status', 'watchlistId', 'q', 'sort', 'page', 'limit'];
+
+    // Express turns ?page=1&page=2 into an array. None of these make sense twice.
+    const repeated = names.filter(
+        (name) => req.query[name] !== undefined && typeof req.query[name] !== 'string'
+    );
+    if (repeated.length > 0) {
+        const details = Object.fromEntries(repeated.map((name) => [name, `Send ${name} only once`]));
+        throw new HttpError(400, 'Invalid query', details);
+    }
+
+    // A GET form sends every field, filled in or not (?q=&status=), so an empty value means "not set".
+    const value = (name) => (req.query[name] === '' ? undefined : req.query[name]);
+    const status = value('status');
+    const watchlistId = value('watchlistId');
+    const q = value('q');
+    const sort = value('sort') ?? DEFAULT_SORT;
+    const page = value('page') ?? '1';
+    const limit = value('limit') ?? String(DEFAULT_LIMIT);
+
+    const errors = {};
+    const filter = {};
     next();
 }

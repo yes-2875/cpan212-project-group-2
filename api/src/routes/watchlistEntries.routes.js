@@ -12,10 +12,12 @@ import {
     validateEntryCreate,
     validateEntryUpdate
 } from '../schemas/validation.schemas.js';
+import { parseEntryListQuery } from '../middleware/entryListQuery.js';
 
 const router = Router();
 
-router.get('/', getAllEntries);
+// Filter, sort and paginate: ?status=&watchlistId=&q=&sort=&page=&limit=
+router.get('/', parseEntryListQuery, getAllEntries);
 router.get('/:id', getEntryById);
 
 router.post('/', validate(validateEntryCreate), createEntry);
