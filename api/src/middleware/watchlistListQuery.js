@@ -26,9 +26,24 @@ export function parseWatchlistListQuery(req, res, next) {
     const errors = {};
     const filter = {};
 
+    if (q !== undefined) {
+        if (q.length > MAX_SEARCH_LENGTH) {
+            errors.q = `Must be ${MAX_SEARCH_LENGTH} characters or fewer`;
+        } else {
+            // Case-insensitive "name or description contains q".
+            const pattern = new RegExp(escapeRegex(q), 'i');
+            filter.$or = [{ name: pattern }, { description: pattern }];
+        }
+    }
+
+    const sortBy = parseSort(sort, SORT_FIELDS, errors);
+    const { page, limit } = parsePaging(readQuery(req.query, 'page'), readQuery(req.query, 'limit'), errors);
+
     if (Object.keys(errors).length > 0) {
         throw new HttpError(400, 'Invalid query', errors);
     }
+
+    res.locals.listQuery = { filter, sort: sortBy, page, limit };
     
     next();
 }

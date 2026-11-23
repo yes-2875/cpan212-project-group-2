@@ -20,12 +20,29 @@ async function findWatchlistOr404(id) {
   return watchlist;
 }
 
-// GET /api/watchlists
-// Get all watchlists
+// GET /api/watchlists?q=&sort=&page=&limit=
+// Get one page of watchlists, filtered and sorted.
+// The query string was already checked by parseWatchlistListQuery (middleware/watchlistListQuery.js).
 export async function getAllWatchlists(req, res) {
-  const watchlists = await Watchlist.find().sort({ name: 1, _id: 1 });
+  const { filter, sort, page, limit } = res.locals.listQuery;
 
-  res.status(200).json(watchlists);
+  // One page of watchlists and the total number that match, fetched at the same time.
+  const [watchlists, total] = await Promise.all([
+    Watchlist.find(filter)
+      .sort(sort)
+      .skip((page - 1) * limit)
+      .limit(limit),
+    Watchlist.countDocuments(filter)
+  ]);
+
+  // A page past the end isn't an error: data is just empty.
+  res.status(200).json({
+    data: watchlists,
+    page,
+    limit,
+    total,
+    totalPages: Math.ceil(total / limit)
+  });
 }
 
 // GET /api/watchlists/:id

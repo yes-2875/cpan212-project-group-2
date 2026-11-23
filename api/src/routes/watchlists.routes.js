@@ -12,10 +12,12 @@ import {
     validateWatchlistCreate,
     validateWatchlistUpdate
 } from '../schemas/validation.schemas.js';
+import { parseWatchlistListQuery } from '../middleware/watchlistListQuery.js';
 
 const router = Router();
 
-router.get('/', getAllWatchlists);
+// Filter, sort and paginate: ?q=&sort=&page=&limit=
+router.get('/', parseWatchlistListQuery, getAllWatchlists);
 router.get('/:id', getWatchlistById);
 
 router.post('/', validate(validateWatchlistCreate), createWatchlist);
