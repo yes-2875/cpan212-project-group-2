@@ -25,8 +25,9 @@ export default function SearchPage() {
         setAnime([]);
 
         try {
+            // The list endpoint is paginated, so ask for the largest page (50) to fill the "Add to" menu.
             const [watchlistResult, results] = await Promise.all([
-                getWatchlists({limit: 50}),
+                getWatchlists({ limit: 50, sort: 'name' }),
                 searchAnime(query.trim()),
             ]);
         
@@ -35,7 +36,7 @@ export default function SearchPage() {
             } else {
                 setAnime(results);
                 setSearched(true);
-                setWatchlists(_watchlists);
+                setWatchlists(watchlistResult.data ?? []);
                 showNotification(`Found ${results.length} anime.`);
             }
         } catch (error) {
