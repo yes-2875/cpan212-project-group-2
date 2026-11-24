@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import { HttpError } from '../lib/httpError.js';
 import Watchlist from '../models/Watchlist.js';
-import WatchlistEntry from '../models/WatchlistEntry.js';
+import WatchlistEntry, { ENTRY_FIELDS } from '../models/WatchlistEntry.js';
+import { pickFields } from '../lib/pickFields.js';
 
 // GET /api/watchlist-entries?status=&watchlistId=&q=&sort=&page=&limit=
 // Get one page of anime entries, filtered and sorted.

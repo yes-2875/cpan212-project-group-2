@@ -3,6 +3,7 @@ import { HttpError } from '../lib/httpError.js';
 import { SAMPLE_USER_ID } from '../lib/constants.js';
 import Watchlist from '../models/Watchlist.js';
 import WatchlistEntry from '../models/WatchlistEntry.js';
+import { pickFields } from '../lib/pickFields.js';
 
 // Finds a watchlist or throws a 404.
 // A malformed id ("abc") and a well-formed id that doesn't exist both get the same 404.
