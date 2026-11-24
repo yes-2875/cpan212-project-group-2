@@ -7,11 +7,6 @@ import {
     deleteWatchlist
 } from '../controllers/watchlists.controller.js';
 
-import { validate } from '../middleware/validate.js';
-import {
-    validateWatchlistCreate,
-    validateWatchlistUpdate
-} from '../schemas/validation.schemas.js';
 import { parseWatchlistListQuery } from '../middleware/watchlistListQuery.js';
 
 const router = Router();
@@ -20,8 +15,9 @@ const router = Router();
 router.get('/', parseWatchlistListQuery, getAllWatchlists);
 router.get('/:id', getWatchlistById);
 
-router.post('/', validate(validateWatchlistCreate), createWatchlist);
-router.put('/:id', validate(validateWatchlistUpdate), updateWatchlist);
+// Body validation happens in the Mongoose schema (models/), not in a middleware.
+router.post('/', createWatchlist);
+router.put('/:id', updateWatchlist);
 
 router.delete('/:id', deleteWatchlist);
 
