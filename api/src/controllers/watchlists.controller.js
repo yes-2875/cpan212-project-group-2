@@ -3,18 +3,19 @@ import { HttpError } from '../lib/httpError.js';
 import { SAMPLE_USER_ID } from '../lib/constants.js';
 import Watchlist from '../models/Watchlist.js';
 import WatchlistEntry from '../models/WatchlistEntry.js';
+import { pickFields } from '../lib/pickFields.js';
 
 // Finds a watchlist or throws a 404.
 // A malformed id ("abc") and a well-formed id that doesn't exist both get the same 404.
 async function findWatchlistOr404(id) {
   if (!mongoose.isObjectIdOrHexString(id)) {
-    throw new HttpError(400, 'Watchlist not found', { id });
+    throw new HttpError(404, 'Watchlist not found', { id });
   }
 
   const watchlist = await Watchlist.findById(id);
 
   if (!watchlist) {
-    throw new HttpError(400, 'Watchlist not found', { id });
+    throw new HttpError(404, 'Watchlist not found', { id });
   }
 
   return watchlist;
@@ -35,9 +36,21 @@ export async function getAllWatchlists(req, res) {
     Watchlist.countDocuments(filter)
   ]);
 
+  // How many entries each watchlist on this page has, in one query instead of one per watchlist.
+  // $group counts the entries per watchlistId; watchlists with no entries just don't appear in counts.
+  const counts = await WatchlistEntry.aggregate([
+    { $match: { watchlistId: { $in: watchlists.map((watchlist) => watchlist._id) } } },
+    { $group: { _id: '$watchlistId', count: { $sum: 1 } } }
+  ]);
+  const countById = new Map(counts.map(({ _id, count }) => [String(_id), count]));
+
   // A page past the end isn't an error: data is just empty.
   res.status(200).json({
-    data: watchlists,
+    // toJSON() gives the plain object (without __v), so entryCount can be added next to the fields.
+    data: watchlists.map((watchlist) => ({
+      ...watchlist.toJSON(),
+      entryCount: countById.get(String(watchlist._id)) ?? 0
+    })),
     page,
     limit,
     total,
@@ -53,40 +66,41 @@ export async function getWatchlistById(req, res) {
   res.status(200).json(watchlist);
 }
 
+// The fields a client may send when creating or updating a watchlist.
+const WATCHLIST_FIELDS = ['name', 'description'];
+
 // POST /api/watchlists
 // Create a new watchlist
 export async function createWatchlist(req, res) {
-  // Copy only the allowed fields, so a client can't choose its own _id or userId.
+  // pickFields copies only name and description, so a client can't choose its own _id or userId.
   // create() runs the schema rules; a failure becomes a 400 in the error handler.
   const watchlist = await Watchlist.create({
-    userId: SAMPLE_USER_ID,
-    name: req.body.name,
-    description: req.body.description
+    ...pickFields(req.body, WATCHLIST_FIELDS),
+    userId: SAMPLE_USER_ID
   });
 
   res.location('/api/watchlists/' + watchlist._id);
-  res.status(201).json({data: watchlist});
+  // Same shape as GET /api/watchlists/:id, so the frontend can read body._id.
+  res.status(201).json(watchlist);
 }
 
 // PUT /api/watchlists/:id
 // Update a watchlist
 export async function updateWatchlist(req, res) {
-  // Copy only the fields that were sent.
-  const changes = {};
-  for (const field of ['name', 'description']) {
-    if (req.body[field] !== undefined) {
-      changes[field] = req.body[field];
-    }
+  const changes = pickFields(req.body, WATCHLIST_FIELDS);
+
+  if (Object.keys(changes).length === 0) {
+    throw new HttpError(400, 'Validation failed', {
+      body: 'Provide at least one field to update'
+    });
   }
 
-  await findWatchlistOr404(req.params.id);
+  const watchlist = await findWatchlistOr404(req.params.id);
 
-  // returnDocument: 'after' returns the updated document instead of the old one.
-  // runValidators: true applies the schema rules, which updates skip by default.
-  const watchlist = await Watchlist.findByIdAndUpdate(req.params.id, changes, {
-    returnDocument: 'after',
-    runValidators: true
-  });
+  // set() + save() runs the schema rules on the changed document, and a bad value
+  // comes back as a ValidationError with field details, the same as on create.
+  watchlist.set(changes);
+  await watchlist.save();
 
   res.status(200).json(watchlist);
 }
