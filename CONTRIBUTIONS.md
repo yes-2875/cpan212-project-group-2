@@ -87,3 +87,25 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 - 2: Pages (commits [f677fc0](https://github.com/yes-2875/cpan212-project-group-2/commit/f677fc0f7151642925f69d0158128cd8b6179d49), [4dd4a8f](https://github.com/yes-2875/cpan212-project-group-2/commit/4dd4a8f41caac7337bea9dffd2a919cdcb22c62d), [19879d5](https://github.com/yes-2875/cpan212-project-group-2/commit/19879d58332ccbac9f35a9213ee36d112b38b7c5), [102eef1](https://github.com/yes-2875/cpan212-project-group-2/commit/102eef1c148727d5957c7b0909c19a410a7f570a), [7354172](https://github.com/yes-2875/cpan212-project-group-2/commit/7354172fb06468a9fcaa3952e6647c5e321b6cfe))
 - 5: Create and edit forms (commits [5516cfd](https://github.com/yes-2875/cpan212-project-group-2/commit/5516cfd540b20a194ccb34f1bacc9e3a81d19d1d), [221a99a](https://github.com/yes-2875/cpan212-project-group-2/commit/221a9aa706ab0da04ae80160a1b97ad467feca24), [ee2bddf](https://github.com/yes-2875/cpan212-project-group-2/commit/ee2bddf29200a4c487ba94f2c38133c15b5c0f28), [52356bb](https://github.com/yes-2875/cpan212-project-group-2/commit/52356bba461aba7585254ab592b6481dfa442988))
 - 6: Loading, empty, and error states (commits [916a527](https://github.com/yes-2875/cpan212-project-group-2/commit/916a5274150d82fb6cc1dffdd057dcfb75f2f7ad), [2b5e347](https://github.com/yes-2875/cpan212-project-group-2/commit/2b5e3477fc1609bc79c2f3e65380954d9acd1ff5))
+
+## M4: MongoDB persistence
+
+### Zlata Skotnyk (@ZlataSkotnyk)
+**Completed items 1, 2, 3, 7:**
+- 1: Connection
+- 2: Models replace in-memory data
+- 3: Related models
+- 7: Seed script
+
+### Mirza Baig (@yes-2875)
+**Completed items 4, 5, 7, 8:**
+- 4: Validation errors
+- 5: Filter, sort, and paginate
+- 7: Seed script
+- 8: README
+
+### Keziah Corpuz (@cheetochiyo)
+**Completed items 4, 6, 8:**
+- 4: Validation errors
+- 6: List page controls
+- 8: CONTRIBUTIONS.md
