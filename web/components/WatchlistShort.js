@@ -20,8 +20,9 @@ export default function WatchlistShort({data, entryCount = 0}) {
         setDeleteText('Delete');
       }
     } else if (clicks === 2) {
-      // Figure out how to post the DELETE request for this watchlist entry and refresh the watchlists page
-      const response = await fetch(`${process.env.BASE_URL ?? 'http://localhost:3000'}/api/watchlists/${data._id}`, {
+      // Relative URL: in the browser, /api/... goes through the Next.js rewrite to the Express API.
+      // The API also deletes the watchlist's entries.
+      const response = await fetch(`/api/watchlists/${data._id}`, {
         method: 'DELETE'
       });
       
@@ -43,7 +44,7 @@ export default function WatchlistShort({data, entryCount = 0}) {
       <Link href={`/watchlists/${_id}`}>
         <h2>{name}</h2>
         {description && <p>{description}</p>}
-        <p className='muted'>{entryCount} items</p>
+        <p className='muted'>{entryCount} {entryCount === 1 ? 'entry' : 'entries'}</p>
         <p style={{textAlign: 'center'}}>Click to view more/edit</p>
       </Link>
       <button className='delete' onClick={() => handleDelete(1)} onDoubleClick={() => handleDelete(2)}>{deleteText}</button>
