@@ -131,6 +131,8 @@ export async function updateEntry(req, res) {
         score
     } = req.body;
 
+    const changes = {};
+
     if (watchlistId !== undefined) {
         // A bad watchlistId in the body is invalid input (400), not a missing entry (404).
         if (!mongoose.isValidObjectId(watchlistId)) {
@@ -156,25 +158,53 @@ export async function updateEntry(req, res) {
     if (status !== undefined) entry.status = status;
     if (score !== undefined) entry.score = score;
 
+    // Check episode numbers using both existing and updated values.
+    const finalTotalEpisodes = totalEpisodes !== undefined
+        ? totalEpisodes
+        : entry.totalEpisodes;
+
+    const finalCurrentEpisode = currentEpisode !== undefined
+        ? currentEpisode
+        : entry.currentEpisode;
+
+    if (
+        finalTotalEpisodes > 0 &&
+        finalCurrentEpisode > finalTotalEpisodes
+    ) {
+        throw new HttpError(400, 'Validation failed', {
+            currentEpisode: 'Current episode cannot exceed total episodes'
+        });
+    }
+
     // sanitizeFilter treats any { $...: } object as a plain value, so $ne must be marked trusted.
     // Safe here: our code builds the object, and id was already checked to be a valid ObjectId.
     const entryExists = await WatchlistEntry.findOne({
         _id: mongoose.trusted({ $ne: id }),
-        watchlistId: entry.watchlistId,
-        malId: entry.malId
+        watchlistId: changes.watchlistId ?? entry.watchlistId,
+        malId: changes.malId ?? entry.malId
     });
 
     if (entryExists) {
         throw new HttpError(409, 'This entry already exists in watchlist', {
-            watchlistId: entry.watchlistId,
-            malId: entry.malId
+            watchlistId: changes.watchlistId ?? entry.watchlistId,
+            malId: changes.malId ?? entry.malId
         });
     }
 
-    await entry.save();
-    await entry.populate('watchlistId');
+    const updatedEntry = await WatchlistEntry.findByIdAndUpdate(
+        id,
+        changes,
+        {
+            returnDocument: 'after',
+            runValidators: true
+        }
+    ).populate('watchlistId');
 
-    res.status(200).json(entry);
+    if (!updatedEntry) {
+        throw new HttpError(404, 'Watchlist entry not found', { id });
+    }
+
+    res.status(200).json(updatedEntry);
 }
 
 // DELETE /api/watchlist-entries/:id
