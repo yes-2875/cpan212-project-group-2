@@ -1,4 +1,3 @@
-import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
 
