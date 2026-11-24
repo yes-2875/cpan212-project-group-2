@@ -1,127 +1,108 @@
-import { getWatchlistEntries, getWatchlists } from "@/lib/api.js";
-import { notFound } from "next/navigation";
+import { getWatchlists } from "@/lib/api.js";
+import Form from "next/form";
 import Link from "next/link";
 import WatchlistShort from "@/components/WatchlistShort";
+import Pagination from "@/components/Pagination";
+import {
+  MAX_SEARCH_LENGTH,
+  PAGE_SIZES,
+  WATCHLIST_SORT_OPTIONS,
+  readWatchlistListOptions,
+  watchlistsHref,
+} from "@/lib/list-options";
 import styles from "../page.module.css";
 
-function valueOf(value, fallback = '') {
-  return typeof value === 'string' ? value : fallback;
-}
+export const metadata = {
+  title: 'Your watchlists',
+};
 
-function makePageUrl({q, sort, limit}, page) {
-  const params = new URLSearchParams();
-  if (q) params.set('q', q);
-  if (sort) params.set('sort', sort);
-  if (limit) params.set('limit', String(limit));
-  params.set('page', String(page));
-  return `/watchlists?${params.toString()}`;
-}
+// The search, sort, page and page size all live in the URL (/watchlists?q=fav&sort=-name&page=2),
+// so reloading, bookmarking or sharing the URL shows the same view.
+export default async function Watchlists({ searchParams }) {
+  // In Next.js 16 searchParams is a promise. readWatchlistListOptions turns it into safe values.
+  const options = readWatchlistListOptions(await searchParams);
+  const { q, sort, limit } = options;
 
-export default async function Watchlists({searchParams}) {
-  const params = await searchParams;
-  const q = valueOf(params?.q);
-  const sort = valueOf(params?.sort, 'name');
-  const page = valueOf(params?.page, '1');
-  const limit = valueOf(params?.limit, '10');
+  const result = await getWatchlists(options);
+  const { data: watchlists, page, total, totalPages } = result;
 
-  const result = await getWatchlists({q, sort, page, limit});
-  
-  if (!result || !Array.isArray(result.data)) {
-    notFound();
-  }
-  
-  const watchlists = result.data;
-  const totalPages = Math.max(result.totalPages, 1);
-
-  const watchlistsWithCounts = await Promise.all(
-    watchlists.map(async (watchlist) => {
-      const entryResult = await getWatchlistEntries({
-        watchlistId: watchlist._id,
-        page: 1,
-        limit: 1,
-      });
-
-      return {
-        watchlist,
-        entryCount: entryResult.total,
-      }
-    })
-  )
+  // Links keep the current search, sort and page size, and change only the page.
+  const hrefFor = (nextPage) => watchlistsHref({ q, sort, limit, page: nextPage });
 
   return (
     <section>
-      <h1 className={styles.title}> Your Watchlists</h1>
+      <h1 className={styles.title}>Your Watchlists</h1>
 
-      <form className={styles.listControls} action="/watchlists" method="GET">
+      {/* A GET form: submitting it loads /watchlists?q=...&sort=...&limit=..., the same as clicking a link.
+          It has no page field, so a new search or sort starts at page 1.
+          key: defaultValue only sets the starting value, so a new key makes React rebuild the form
+          when the URL changes (e.g. after Clear), instead of keeping the old text in the inputs. */}
+      <Form key={`${q}|${sort}|${limit}`} className={styles.listControls} action="/watchlists">
         <label className={styles.controlField}>
-          Search Watchlists
+          Search watchlists
           <input
             type="search"
             name="q"
             placeholder="Name or description"
             defaultValue={q}
+            maxLength={MAX_SEARCH_LENGTH}
           />
         </label>
 
         <label className={styles.controlField}>
           Sort by
           <select name="sort" defaultValue={sort}>
-            <option value="name">Name (A-Z)</option>
-            <option value="name">Name (Z-A)</option>
-            <option value="created">Oldest first</option>
-            <option value="created">Newest first</option>
+            {WATCHLIST_SORT_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </select>
         </label>
 
         <label className={styles.controlField}>
           Items per page
-          <select name ="limit" defaultValue={limit}>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
+          <select name="limit" defaultValue={String(limit)}>
+            {PAGE_SIZES.map((size) => (
+              <option key={size} value={size}>{size}</option>
+            ))}
           </select>
         </label>
 
         <button type="submit">Apply</button>
         <Link href="/watchlists">Clear</Link>
-      </form>
+      </Form>
 
-      {watchlistsWithCounts.length > 0 ? (
+      {watchlists.length > 0 ? (
         <div className={styles.watchlists}>
-          {watchlistsWithCounts.map(({watchlist, entryCount}) => (
+          {watchlists.map((watchlist) => (
             <WatchlistShort
-              key={watchlist_id}
+              key={watchlist._id}
               data={watchlist}
-              entryCount={entryCount}
+              entryCount={watchlist.entryCount}
             />
           ))}
         </div>
-      ) : ( <h3> {q ? 'No watchlists match your search.' : 'You have no watchlists. Use the button below to create one.'} </h3> )}
-      
-      {result.total > 0 && (
-        <nav className={styles.pagination} aria-label="Watchlist pages">
-          {result.page > 1 ? (
-            <Link href={makePageUrl({q, sort, limit}, result.page - 1)}>
-              Previous
-            </Link>
-          ) : (
-            <span aria-disabled="true">Previous</span>
-          )}
-          <span>Page {result.page} of {totalPages} ({result.total} watchlists)</span>
-
-          {result.page < result.totalPages ? (
-            <Link href={makePageUrl({q, sort, limit}, result.page + 1)}>
-              Next
-            </Link>
-          ) : (
-            <span aria-disabled="true">Next</span>
-          )}
-        </nav>
+      ) : total > 0 ? (
+        // A hand-typed ?page=9 when there are only 2 pages.
+        <h3>
+          There are no watchlists on page {page}. Go back to the{' '}
+          <Link href={hrefFor(1)}>first page</Link>.
+        </h3>
+      ) : q ? (
+        <h3>No watchlists match &quot;{q}&quot;.</h3>
+      ) : (
+        <h3>You have no watchlists. Use the button below to create one.</h3>
       )}
 
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        total={total}
+        noun={total === 1 ? 'watchlist' : 'watchlists'}
+        hrefFor={hrefFor}
+        label="Watchlist pages"
+      />
+
       <Link className={styles.createButton} href='/watchlists/new'>Create new watchlist</Link>
-      
     </section>
   );
 }
