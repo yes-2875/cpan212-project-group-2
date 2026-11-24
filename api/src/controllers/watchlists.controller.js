@@ -9,7 +9,7 @@ import { pickFields } from '../lib/pickFields.js';
 // A malformed id ("abc") and a well-formed id that doesn't exist both get the same 404.
 async function findWatchlistOr404(id) {
   if (!mongoose.isObjectIdOrHexString(id)) {
-    throw new HttpError(400, 'Watchlist not found', { id });
+    throw new HttpError(404, 'Watchlist not found', { id });
   }
 
   const watchlist = await Watchlist.findById(id);
