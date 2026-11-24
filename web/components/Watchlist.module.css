@@ -38,7 +38,7 @@
   padding: 0.4em;
 }
 
-.listControls button, .listControls a, .pagination a {
+.listControls button, .listControls a {
   display: inline-block;
   padding: 0.55em 0.9em;
   border: 1px solid var(--button-neutral-border);
@@ -60,18 +60,7 @@
     margin-block-end: 0.5em;
 }
 
-.pagination {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  margin-block: 1em;
-}
 
-.pagination span[aria-disabled="true"] {
-  opacity: 0.45;
-}
 
 @media (max-width: 800px) {
   .entryCards {
