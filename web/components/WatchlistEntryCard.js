@@ -33,7 +33,8 @@ export default function WatchlistEntryCard({data}) {
       }
       
       showNotification('Successfully removed watchlist entry');
-      router.push('/watchlists/' + data.watchlistId);
+      const watchlistId = data.watchlistId?._id ?? data.watchlistId;
+      router.push('/watchlists/' + watchlistId);
     }
   }
   
