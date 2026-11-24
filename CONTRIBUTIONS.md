@@ -92,9 +92,9 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Zlata Skotnyk (@ZlataSkotnyk)
 **Completed items 1, 2, 3, 7:**
-- 1: Connection
-- 2: Models replace in-memory data
-- 3: Related models
+- 1: Connection (commits [024b37a](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/024b37ac421f6be7e970d6a7367f80c5206fbb80), [677ad91](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/677ad919b1852116679608bfcb04027d0b22efdb))
+- 2: Models replace in-memory data (commits [d1c6344](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/d1c63443763a463d62aac850c1fdee720f04c53d), [3354c9b](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/3354c9b312dd2904b07654404e275d32d5f414bb))
+- 3: Related models (commits [f6971d6](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/f6971d62a73768d710f35fae70f033301930e6b9))
 - 7: Seed script
 
 ### Mirza Baig (@yes-2875)
