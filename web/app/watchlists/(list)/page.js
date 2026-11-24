@@ -67,9 +67,9 @@ export default async function Watchlists({searchParams}) {
           Sort by
           <select name="sort" defaultValue={sort}>
             <option value="name">Name (A-Z)</option>
-            <option value="name">Name (Z-A)</option>
+            <option value="-name">Name (Z-A)</option>
             <option value="created">Oldest first</option>
-            <option value="created">Newest first</option>
+            <option value="-created">Newest first</option>
           </select>
         </label>
 
@@ -84,14 +84,14 @@ export default async function Watchlists({searchParams}) {
         </label>
 
         <button type="submit">Apply</button>
-        <Link href="/watchlists">Clear</Link>
+        <Link href="/watchlists" className="button">Clear</Link>
       </form>
 
       {watchlistsWithCounts.length > 0 ? (
         <div className={styles.watchlists}>
           {watchlistsWithCounts.map(({watchlist, entryCount}) => (
             <WatchlistShort
-              key={watchlist_id}
+              key={watchlist._id}
               data={watchlist}
               entryCount={entryCount}
             />
