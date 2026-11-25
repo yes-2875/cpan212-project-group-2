@@ -5,7 +5,7 @@
 - Zlata (@ZlataSkotnyk)
 - Keziah (@cheetochiyo)
 
-## M3: Running the frontend and backend
+## M3 + M4: Running the frontend and backend
 ### Video demonstration for M2 and M3:
 https://youtu.be/EwYVtFUykzo
 
@@ -16,32 +16,61 @@ https://youtu.be/EwYVtFUykzo
 
 ### 1. Installing dependencies
 - Install frontend dependencies
+
 `cd web`
+
 `npm install`
 
 - Install backend dependencies
+
 `cd ../api`
+
 `npm install`
 
-### 2. Environment variable configuration
-- Frontend (web/)
-**Copy the example environment variables** using `cp .env.example .env`
+### 2. M4 Database setup
+M4 uses a **MongoDB database** to store watchlists and watchlist entries, as well as to offer sorting, pagination, and query capabilities in the backend which are exposed to the frontend. **The following steps show how to create a MongoDB database and connect it to the backend:**
 
-- Backend (api/)
-**Copy the example environment variables** using `cp .env.example .env`
+1. Create an account at https://www.mongodb.com/cloud/atlas/register:
+    - **Create a new project** using the sidebar in the user interface.
+2. Create a free cluster:
+    - In the sidebar, click **Project Overview**, then **Create**.
+    - Select the **M0 (free)** option.
+    - **Pick any provider** and a **region** close to you, give it a **name** and click **Create**.
+    - Input a username and autogenerate a secure password **without special characters** in the Security Quickstart that shows, and then press **Create Database User**. Also click **Add My Current IP Address**, then click **Finish and Close**.
+3. Click the Connect button, then press Drivers, and copy the connection string. It looks a bit like `mongodb+srv://<username>:<db_password>@cluster0.abcde.mongodb.net/?appName=Cluster0`.
+    - Replace `<username>` and `<db_password>` with your database user's name and password. Add `yumi` after the forward slash `/`.
+    - Use that string as the value of the `MONGODB_URI` environment variable in the backend as described below.
+  
 
-### 3. Start backend
+### 3. Environment variable configuration
+Frontend (web/):
+- **Copy the example environment variables** using `cp .env.example .env`
+
+Backend (api/):
+- **Copy the example environment variables** using `cp .env.example .env`
+- Set `MONGODB_URI` to the MongoDB connection string retrieved earlier in the M4 database setup. Example: `MONGODB_URI=mongodb+srv://<db_user>:<db_password>@cluster0.abcde.mongodb.net/yumi?appName=Cluster0`
+
+### 4. Start backend
 - Runs at http://localhost:4000
-`cd api`
-`npm run dev`
 
-### 4. Start frontend
+```bash
+cd api
+npm run seed # Deletes all existing data and populates MongoDB with sample data
+npm run dev
+```
+
+### 5. Start frontend
 - Runs at http://localhost:3000
-`cd web`
-`npm run dev`
 
-### 5. Open app
+```bash
+cd web
+npm run dev
+```
+
+### 6. Open app
 - Visit http://localhost:3000
+
+### M4: 
 
 ## AI use
 ### M2
@@ -60,3 +89,9 @@ Gemini:
 
 ChatGPT
 - explained merge conflicts
+
+### M4
+Gemini:
+- Pointed out validation inconsistencies in Mongoose schemas vs. old validation. I looked at the Mongoose docs in detail to check how to replicate the validation checks I was missing.
+- Generated sample watchlists and entries to use for seed script
+- Explained alternate method of wrapping components inside a Suspense (the old Promise.then() logic was kinda hacky and confusing to work with when involving search parameters in dynamic routes, switched to using async functions)

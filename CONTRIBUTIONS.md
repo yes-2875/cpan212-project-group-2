@@ -103,7 +103,7 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 - 4: Validation + error handling in API (commits [e5fa8ca](https://github.com/yes-2875/cpan212-project-group-2/commit/e5fa8ca0f35bce7224b54b3e0250b55bec081c47), [a06615f](https://github.com/yes-2875/cpan212-project-group-2/commit/a06615ff4b28a9ac5a61e71c0318c01a22113ae9), [1492dcc](https://github.com/yes-2875/cpan212-project-group-2/commit/1492dcc64022b7cdbc81cc4e9245f3a819fb964d), [6910b62](https://github.com/yes-2875/cpan212-project-group-2/commit/6910b6257c808c7663ba15544fc10140aa71b3e8), [5a96929](https://github.com/yes-2875/cpan212-project-group-2/commit/5a96929bad42b2795b655badc5aaa4c4d0b68b99))
 - 5: Filter, sort, and paginate in API (commits [c4dee35](https://github.com/yes-2875/cpan212-project-group-2/commit/c4dee3598908b898985c5252665f1b9e8285dcdb), [6b1b2f1](https://github.com/yes-2875/cpan212-project-group-2/commit/6b1b2f189c92e4d01a54e5a2e98a5bb3a6a6d86e), [c760b23](https://github.com/yes-2875/cpan212-project-group-2/commit/c760b23f1a3f8ca3933f385c4412d924dd3e0db9), [d265358](https://github.com/yes-2875/cpan212-project-group-2/commit/d265358b3a9388abf83d6a7b923dee40f5bf35aa), [f40f613](https://github.com/yes-2875/cpan212-project-group-2/commit/f40f6137cc4606d6198acd40ec1915da4e28fcf6), [989c464](https://github.com/yes-2875/cpan212-project-group-2/commit/989c464cd1648bc375ccce9df3ab9cc912887d34))
 - 7: Seed script creation (commit [f1c5935](https://github.com/yes-2875/cpan212-project-group-2/commit/f1c5935372a3038a4391a46212d174c7ecabf559))
-- 8: README.md
+- 8: README.md (M4 AI usage + database setup instructions)
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 4, 6, 8:**
