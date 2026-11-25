@@ -1,21 +1,18 @@
 'use client';
 
 import styles from './SearchResult.module.css';
-import { useNotification } from '@/app/context/NotificationContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Image from 'next/image';
 
 export default function SearchResult({ data, watchlists }) {
-  if (!data) {
-    return null;
-  }
-
-  const { showNotification } = useNotification();
+  // Hooks must run on every render, so they come before the early return.
   const [adding, setAdding] = useState(false);
   const router = useRouter();
 
-  const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
+  if (!data) {
+    return null;
+  }
 
   const addEntry = async (event) => {
     const { value } = event.target;
@@ -26,20 +23,18 @@ export default function SearchResult({ data, watchlists }) {
 
       setAdding(true);
       
+      // A draft for the new-entry form. episodes is null for a show that's still airing,
+      // and 0 means "unknown" in the API. score is left out: it's the user's own score, set on the form.
       const entry = {
         watchlistId: value,
         malId: data.id,
         title: data.title,
-        imageUrl: data.imageUrl,
-        totalEpisodes: data.episodes,
-        /*currentEpisode: 1,
-        status: 'Plan to Watch',*/
-        score: data.score
+        imageUrl: data.imageUrl ?? '',
+        totalEpisodes: data.episodes ?? 0,
       };
-      
-      const encoded = JSON.stringify(entry);
-      
-      router.push(`/watchlist-entries/new?data=${encodeURIComponent(encoded)}`);
+
+      const query = new URLSearchParams({ data: JSON.stringify(entry) });
+      router.push(`/watchlist-entries/new?${query}`);
       setAdding(false);
       
     }
@@ -73,7 +68,7 @@ export default function SearchResult({ data, watchlists }) {
               {watchlists.map((item) => <option key={item._id} value={item._id} className={styles.option}>{item.name}</option>)}
             </select>
           )}
-          <a className='button' href={`https://myanimelist.net/anime/${data.id}`} target='_blank'>View on MAL</a>
+          <a className='button' href={`https://myanimelist.net/anime/${data.id}`} target='_blank' rel='noreferrer'>View on MAL</a>
         </div>
       </div>
 

@@ -1,19 +1,16 @@
 'use client';
 
 import { useState } from "react";
-import { notFound, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useNotification } from "@/app/context/NotificationContext";
 import styles from './WatchlistEdit.module.css';
 
+// The page checks that the watchlist exists before rendering this form.
 export default function WatchlistEdit({data}) {
-  if (!data) {
-    notFound();
-  }
-  
   const router = useRouter();
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState('');
   const {showNotification} = useNotification();
   
   const handleSubmit = async(event) => {
@@ -22,7 +19,7 @@ export default function WatchlistEdit({data}) {
     if (submitting) { return; }
     
     setErrors({});
-    setMessage({});
+    setMessage('');
     setSubmitting(true);
     
     const form = new FormData(event.currentTarget);
@@ -42,10 +39,9 @@ export default function WatchlistEdit({data}) {
       const body = await response.json();
       
       if (!response.ok) {
-        if (body.error.details) {
-          setErrors(body.error.details);
-        }
-        setMessage(body.error.message);
+        // 400: field errors from the Mongoose schema, shown under each input. 404: the watchlist was deleted.
+        setErrors(body.error?.details ?? {});
+        setMessage(body.error?.message ?? `Request failed (${response.status})`);
         setSubmitting(false);
         return;
       }
@@ -68,7 +64,7 @@ export default function WatchlistEdit({data}) {
       <p>Enter the following details to edit this watchlist.</p>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         
-        { message.length > 0 && <p className={styles.error}>{message}</p> }
+        { message && <p className={styles.error}>{message}</p> }
         <div className={styles.field}>
           <label htmlFor='name'>Name*:</label>
           <input type='text' id='name' name='name' defaultValue={data.name} />

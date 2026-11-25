@@ -14,10 +14,7 @@ export default function SearchPage() {
 
     const { showNotification } = useNotification();
 
-    const handleSearch = async () => {
-        
-        const _watchlists = await getWatchlists();
-        
+    const handleSearch = async () => {        
         if (!query.trim()) {
             showNotification("Please enter an anime name.");
             return;
@@ -27,18 +24,26 @@ export default function SearchPage() {
         setSearched(false);
         setAnime([]);
 
-        const results = await searchAnime(query.trim());
+        try {
+            // The list endpoint is paginated, so ask for the largest page (50) to fill the "Add to" menu.
+            const [watchlistResult, results] = await Promise.all([
+                getWatchlists({ limit: 50, sort: 'name' }),
+                searchAnime(query.trim()),
+            ]);
         
-        if (results === null) {
-            showNotification("Something went wrong while searching.");
-        } else {
-            setAnime(results);
-            setSearched(true);
-            setWatchlists(_watchlists);
-            showNotification(`Found ${results.length} anime.`);
+            if (results === null) {
+                showNotification("Something went wrong while searching.");
+            } else {
+                setAnime(results);
+                setSearched(true);
+                setWatchlists(watchlistResult.data ?? []);
+                showNotification(`Found ${results.length} anime.`);
+            }
+        } catch (error) {
+            showNotification(error.message || "Something went wrong while searching.")
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     return (

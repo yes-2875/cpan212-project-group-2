@@ -11,6 +11,7 @@
 
 
     width: 48em;
+    max-width: calc(100vw - 2em);
     position: fixed;
     bottom: 1em;
     right: 1em;

@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-block: 1.5em;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 0.55em 0.9em;
+  border: 1px solid var(--button-neutral-border);
+  border-radius: 0.5em;
+  background: var(--button-neutral-bg);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pagination span[aria-disabled="true"] {
+  opacity: 0.45;
+}

@@ -36,9 +36,21 @@ export async function getAllWatchlists(req, res) {
     Watchlist.countDocuments(filter)
   ]);
 
+  // How many entries each watchlist on this page has, in one query instead of one per watchlist.
+  // $group counts the entries per watchlistId; watchlists with no entries just don't appear in counts.
+  const counts = await WatchlistEntry.aggregate([
+    { $match: { watchlistId: { $in: watchlists.map((watchlist) => watchlist._id) } } },
+    { $group: { _id: '$watchlistId', count: { $sum: 1 } } }
+  ]);
+  const countById = new Map(counts.map(({ _id, count }) => [String(_id), count]));
+
   // A page past the end isn't an error: data is just empty.
   res.status(200).json({
-    data: watchlists,
+    // toJSON() gives the plain object (without __v), so entryCount can be added next to the fields.
+    data: watchlists.map((watchlist) => ({
+      ...watchlist.toJSON(),
+      entryCount: countById.get(String(watchlist._id)) ?? 0
+    })),
     page,
     limit,
     total,
@@ -68,7 +80,8 @@ export async function createWatchlist(req, res) {
   });
 
   res.location('/api/watchlists/' + watchlist._id);
-  res.status(201).json({data: watchlist});
+  // Same shape as GET /api/watchlists/:id, so the frontend can read body._id.
+  res.status(201).json(watchlist);
 }
 
 // PUT /api/watchlists/:id
