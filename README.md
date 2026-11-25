@@ -70,7 +70,45 @@ npm run dev
 ### 6. Open app
 - Visit http://localhost:3000
 
-### M4: 
+## M4: List query parameters
+Both list endpoints accept filtering, sorting and pagination in the query string. Leaving a parameter out, or sending it empty (`?q=`), uses its default. An invalid value returns `400` with a message for each field that was wrong.
+
+### `GET /api/watchlists`
+| Parameter | Type | Default | Allowed values | Description |
+|---|---|---|---|---|
+| `q` | text | none | Up to 100 characters | Case-insensitive search of watchlist name and description |
+| `sort` | text | `name` | `name`, `created` (add `-` in front for reverse order, e.g. `-created`) | Sort order. `created` sorts by creation time |
+| `page` | whole number | `1` | 1 or more | Which page to return |
+| `limit` | whole number | `10` | 1 to 50 | Watchlists per page |
+
+### `GET /api/watchlist-entries`
+| Parameter | Type | Default | Allowed values | Description |
+|---|---|---|---|---|
+| `watchlistId` | id | none | A valid watchlist id | Only entries in this watchlist |
+| `status` | text | none | `Watching`, `Completed`, `Plan to Watch`, `On Hold`, `Dropped` | Only entries with this status |
+| `q` | text | none | Up to 100 characters | Case-insensitive search of anime titles |
+| `sort` | text | `title` | `title`, `score`, `currentEpisode`, `totalEpisodes` (add `-` in front for reverse order, e.g. `-score`) | Sort order |
+| `page` | whole number | `1` | 1 or more | Which page to return |
+| `limit` | whole number | `10` | 1 to 50 | Entries per page |
+
+### Example requests
+```
+GET /api/watchlists?q=anime&sort=-created&limit=5
+GET /api/watchlist-entries?watchlistId=<id>&status=Watching&sort=-score&page=2&limit=5
+```
+
+### Response format
+Both endpoints return one page of results plus the totals:
+```json
+{
+  "data": [ ... ],
+  "page": 2,
+  "limit": 5,
+  "total": 11,
+  "totalPages": 3
+}
+```
+Each watchlist in `GET /api/watchlists` also includes an `entryCount`. Each entry in `GET /api/watchlist-entries` has its `watchlistId` filled in with the whole watchlist. A page past the last one returns an empty `data` array, not an error.
 
 ## AI use
 ### M2
