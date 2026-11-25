@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { HttpError } from '../lib/httpError.js';
-import { ANIME_STATUSES } from '../schemas/validation.schemas.js';
+import { ANIME_STATUSES } from '../models/WatchlistEntry.js';
 import {
   MAX_SEARCH_LENGTH,
   escapeRegex,

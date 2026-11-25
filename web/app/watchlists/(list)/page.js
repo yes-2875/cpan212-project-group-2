@@ -37,7 +37,7 @@ export default async function Watchlists({ searchParams }) {
           It has no page field, so a new search or sort starts at page 1.
           key: defaultValue only sets the starting value, so a new key makes React rebuild the form
           when the URL changes (e.g. after Clear), instead of keeping the old text in the inputs. */}
-      <Form key={`${q}|${sort}|${limit}`} className={styles.listControls} action="/watchlists">
+      <form key={`${q}|${sort}|${limit}`} className={styles.listControls} action="/watchlists">
         <label className={styles.controlField}>
           Search watchlists
           <input
@@ -52,9 +52,10 @@ export default async function Watchlists({ searchParams }) {
         <label className={styles.controlField}>
           Sort by
           <select name="sort" defaultValue={sort}>
-            {WATCHLIST_SORT_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>{option.label}</option>
-            ))}
+            <option value="name">Name (A-Z)</option>
+            <option value="-name">Name (Z-A)</option>
+            <option value="created">Oldest first</option>
+            <option value="-created">Newest first</option>
           </select>
         </label>
 
@@ -68,8 +69,8 @@ export default async function Watchlists({ searchParams }) {
         </label>
 
         <button type="submit">Apply</button>
-        <Link href="/watchlists">Clear</Link>
-      </Form>
+        <Link href="/watchlists" className="button">Clear</Link>
+      </form>
 
       {watchlists.length > 0 ? (
         <div className={styles.watchlists}>

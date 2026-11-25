@@ -1,12 +1,7 @@
-// Helpers for calling the REST API. Requests go to /api/... on the Next.js server,
-// which forwards them to the Express API (see the rewrite in next.config.mjs).
-//
-// On the server (Server Components) fetch needs a full URL, so BASE_URL is used.
-// In the browser (Client Components) process.env.BASE_URL doesn't exist, so a relative URL is used,
-// which always points at whichever host and port the page was loaded from.
-const BASE_URL = typeof window === 'undefined'
-  ? (process.env.BASE_URL ?? 'http://localhost:3000')
-  : '';
+
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
+
+// This file serves as a utility to fetch requests from the REST API that will be running alongside the frontend.
 
 // Builds ?a=1&b=2 from an object, leaving out empty values. The API treats an empty value
 // as "not set" anyway, but leaving them out keeps the request URL clean.
