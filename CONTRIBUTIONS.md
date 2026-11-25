@@ -95,7 +95,6 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 - 1: Connection (commits [024b37a](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/024b37ac421f6be7e970d6a7367f80c5206fbb80), [677ad91](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/677ad919b1852116679608bfcb04027d0b22efdb))
 - 2: Models replace in-memory data (commits [d1c6344](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/d1c63443763a463d62aac850c1fdee720f04c53d), [3354c9b](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/3354c9b312dd2904b07654404e275d32d5f414bb))
 - 3: Related models (commits [f6971d6](https://github.com/yes-2875/cpan212-project-group-2/pull/13/changes/f6971d62a73768d710f35fae70f033301930e6b9))
-- 7: Seed script
 
 ### Mirza Baig (@yes-2875)
 **Completed items 4, 5, 7, 8:**
@@ -106,6 +105,6 @@ Written in commits [8a92c0b](https://github.com/yes-2875/cpan212-project-group-2
 
 ### Keziah Corpuz (@cheetochiyo)
 **Completed items 4, 6, 8:**
-- 4: Validation errors
-- 6: List page controls
+- 4: Validation errors (commits [5fa872e](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/5fa872eebf312cf28a8bcd8579658011d05ab3e2), [264065d](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/264065dc83ebcb748d7eca8c43dda2a5295f01ca))
+- 6: List page controls (commits [1ec4ae1](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/1ec4ae14e1fd8ee420c0cf8d55765cdf67250c8e), [7cef4c6](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/7cef4c605c5ba27da548086da6410a8a1557b749), [e400147](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/e400147dd7a5e567dbb7b3233319de09df37f631), [35dee55](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/35dee5585d97117827ab7ba884f4eb267a46063e), [dd7cea7](https://github.com/yes-2875/cpan212-project-group-2/pull/16/changes/dd7cea79dc4695574ffa87aa58d9d6325a33f277))
 - 8: CONTRIBUTIONS.md
